@@ -46,6 +46,8 @@ export function GameInput({ onCheck, onGiveUp, onSkip, onNext, isReviewing, feed
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
+            e.preventDefault();
+            e.stopPropagation();
             handleCheck();
         }
     };
