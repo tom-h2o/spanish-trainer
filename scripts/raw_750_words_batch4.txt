@@ -1,0 +1,138 @@
+
+# Core Adjectives & Adverbs
+feliz | happy | adjective | Ella siempre está feliz.
+triste | sad | adjective | Hoy me siento un poco triste.
+cansado | tired | adjective | Estoy muy cansado de trabajar.
+enfermo | sick | adjective | No voy porque estoy enfermo.
+sano | healthy | adjective | Comer fruta te mantiene sano.
+fuerte | strong | adjective | Es un hombre muy fuerte.
+débil | weak | adjective | Me siento débil.
+inteligente | intelligent/smart | adjective | Mi hija es muy inteligente.
+tonto | silly/dumb | adjective | No seas tonto.
+rápido | fast/quick | adjective | Este coche es muy rápido.
+lento | slow | adjective | El autobús va muy lento.
+caro | expensive | adjective | Esa casa es demasiado cara.
+barato | cheap | adjective | Encontré zapatos muy baratos.
+limpio | clean | adjective | Mi habitación está limpia.
+sucio | dirty | adjective | Tienes los zapatos sucios.
+lleno | full | adjective | El cine estaba lleno.
+vacío | empty | adjective | El vaso está vacío.
+abierto | open | adjective | La puerta está abierta.
+cerrado | closed | adjective | El museo está cerrado los lunes.
+fácil | easy | adjective | El examen fue muy fácil.
+difícil | difficult/hard | adjective | Aprender ruso es muy difícil.
+posible | possible | adjective | Creo que es posible.
+imposible | impossible | adjective | Eso es imposible de hacer.
+seguro | sure/safe | adjective | Estoy seguro de que vendrá.
+peligroso | dangerous | adjective | Conducir rápido es peligroso.
+importante | important | adjective | Tenemos una reunión importante.
+mismo | same | adjective | Tenemos el mismo coche.
+distinto | different | adjective | Somos de países distintos.
+único | only/unique | adjective | Es mi único hermano.
+solo | alone/lonely | adjective | No me gusta estar solo.
+próximo | next | adjective | Nos vemos la próxima semana.
+último | last/final | adjective | Es la última vez que te lo digo.
+anterior | previous | adjective | En la página anterior.
+siguiente | following/next | adjective | Lea el siguiente párrafo.
+cierto | true/certain | adjective | Eso no es cierto.
+falso | false/fake | adjective | Las noticias eran falsas.
+claro | clear/light | adjective | El agua está muy clara.
+oscuro | dark | adjective | El cuarto está oscuro.
+pesado | heavy | adjective | Esta caja es muy pesada.
+ligero | light (weight) | adjective | Necesito equipaje ligero.
+duro | hard | adjective | Este pan está muy duro.
+suave | soft/smooth | adjective | Tiene la piel muy suave.
+frío | cold | adjective | El invierno es frío.
+caliente | hot | adjective | Ten cuidado, el plato está caliente.
+seco | dry | adjective | Necesito un paño seco.
+mojado | wet | adjective | Estoy mojado por la lluvia.
+rico | rich/delicious | adjective | La comida está rica.
+pobre | poor | adjective | Viven en un país pobre.
+joven | young | adjective | Ella es muy joven aún.
+viejo | old | adjective | Mi coche es viejo, pero funciona.
+nuevo | new | adjective | Compré un libro nuevo.
+alto | tall/high | adjective | El edificio es muy alto.
+bajo | short/low | adjective | El techo de la casa es bajo.
+largo | long | adjective | Tiene el pelo largo.
+corto | short (length) | adjective | El camino más corto es por aquí.
+ancho | wide/broad | adjective | Es un río muy ancho.
+estrecho | narrow | adjective | La calle es muy estrecha.
+bueno | good | adjective | Este es un buen amigo.
+malo | bad | adjective | Hace muy mal tiempo.
+mejor | better/best | adjective | Ella es la mejor estudiante.
+peor | worse/worst | adjective | Fue el peor viaje de mi vida.
+mayor | older/larger | adjective | Mi hermano mayor vive lejos.
+menor | younger/smaller | adjective | Mi hermana menor va a la escuela.
+
+# Time, Numbers, & Calendar
+hoy | today | adverb | Hoy hace un día precioso.
+ayer | yesterday | adverb | Ayer trabajé mucho.
+mañana | tomorrow/morning | noun | Mañana nos vemos.
+ahora | now | adverb | Tienes que salir ahora mismo.
+antes | before | adverb | Tuviste que decírmelo antes.
+después | after/later | adverb | Te llamo después.
+siempre | always | adverb | Siempre me acuesto tarde.
+nunca | never | adverb | Nunca he estado allí.
+pronto | soon | adverb | Espero verte pronto.
+tarde | late/afternoon | adverb | Llegaste muy tarde al tren.
+temprano | early | adverb | Me levanto muy temprano.
+ya | already/now | adverb | Ya he terminado el trabajo.
+todavía | still | adverb | ¿Todavía estás comiendo?
+aún | still/yet | adverb | Aún no, espérate.
+entonces | then | adverb | Entonces, ¿qué hacemos?
+mientras | while | conjunction | Escucho música mientras estudio.
+durante | during | preposition | Me dormí durante la película.
+vez | time/instance | noun | Es la primera vez que vengo.
+veces | times | noun | Fui allí muchas veces.
+hora | hour/time | noun | ¿Qué hora es?
+minuto | minute | noun | Faltan cinco minutos.
+segundo | second | noun | Espera un segundo.
+día | day | noun | Buenos días.
+semana | week | noun | Nos vamos de vacaciones la próxima semana.
+mes | month | noun | Enero es el primer mes del año.
+año | year | noun | Feliz Año Nuevo.
+siglo | century | noun | Vivimos en el siglo veintiuno.
+estación | season/station | noun | El verano es mi estación favorita.
+primavera | spring | noun | Las flores nacen en primavera.
+verano | summer | noun | Hace calor en verano.
+otoño | autumn/fall | noun | Las hojas caen en otoño.
+invierno | winter | noun | En invierno hace mucho frío.
+lunes | Monday | noun | Odio los lunes.
+martes | Tuesday | noun | El martes tengo clase de tenis.
+miércoles | Wednesday | noun | El miércoles es mitad de semana.
+jueves | Thursday | noun | Este jueves voy al cine.
+viernes | Friday | noun | Por fin es viernes.
+sábado | Saturday | noun | El sábado hay una fiesta.
+domingo | Sunday | noun | Los domingos descanso.
+enero | January | noun | Nací en enero.
+febrero | February | noun | Febrero es el mes más corto.
+marzo | March | noun | En marzo empieza la primavera aquí.
+abril | April | noun | Aguas mil en abril.
+mayo | May | noun | Mi madre cumple años en mayo.
+junio | June | noun | En junio terminan las clases.
+julio | July | noun | Me voy de vacaciones en julio.
+agosto | August | noun | Hace demasiado calor en agosto.
+septiembre | September | noun | En septiembre vuelvo a estudiar.
+octubre | October | noun | Halloween es en octubre.
+noviembre | November | noun | Hace frío en noviembre.
+diciembre | December | noun | Navidad es en diciembre.
+uno | one | number | Quiero un café, por favor.
+dos | two | number | Tengo dos perros.
+tres | three | number | Somos tres hermanos.
+cuatro | four | number | El coche tiene cuatro puertas.
+cinco | five | number | Faltan cinco kilómetros.
+seis | six | number | Me levanto a las seis de la mañana.
+siete | seven | number | Trabajo los siete días de la semana.
+ocho | eight | number | Duermo ocho horas diarias.
+nueve | nine | number | Mi número de la suerte es el nueve.
+diez | ten | number | Costó diez euros.
+veinte | twenty | number | Cumplo veinte años.
+treinta | thirty | number | El autobús llegó treinta minutos tarde.
+cuarenta | forty | number | Mi padre tiene cuarenta años.
+cincuenta | fifty | number | Cincuenta sombras de Grey.
+cien | hundred/one hundred | number | Pagué cien dólares.
+mil | thousand | number | Aquel vestido vale mil pesos.
+millón | million | number | Un millón de gracias.
+primero | first | adjective | Esta es mi primera vez aquí.
+segundo | second | adjective | Piso segundo, puerta B.
+tercero | third | adjective | Quedó el tercero de la carrera.

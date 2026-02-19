@@ -1,0 +1,112 @@
+
+# Essential Irregular & Stem-Changing Verbs
+venir | to come (irregular e->ie) | verb | Vengo de muy lejos.
+querer | to want/love (irregular e->ie) | verb | Te quiero con toda mi alma.
+hacer | to do/make (irregular) | verb | ¿Qué vas a hacer hoy?
+decir | to say/tell (irregular e->i) | verb | Siempre me dice la verdad.
+poder | to be able to/can (irregular o->ue) | verb | ¿Puedo pasar?
+poner | to put/place (irregular) | verb | Pon las llaves aquí.
+salir | to leave/go out (irregular) | verb | Salgo del trabajo a las seis.
+dar | to give (irregular) | verb | Dame tu mano.
+saber | to know (irregular) | verb | Yo no sé nada.
+conocer | to know a person/place (irregular) | verb | Conozco a tu hermana.
+pensar | to think (irregular e->ie) | verb | Pienso que es mejor así.
+empezar | to begin/start (irregular e->ie) | verb | La clase empieza ahora.
+entender | to understand (irregular e->ie) | verb | Sigo sin entender.
+sentir | to feel/regret (irregular e->ie) | verb | Lo siento muchísimo.
+dormir | to sleep (irregular o->ue) | verb | Intento dormir ocho horas.
+pedir | to ask for/request (irregular e->i) | verb | Voy a pedir dinero prestado.
+seguir | to follow/continue (irregular e->i) | verb | Sigue todo recto.
+volver | to return/go back (irregular o->ue) | verb | Vuelvo en un rato.
+encontrar | to find (irregular o->ue) | verb | No encuentro mi cartera.
+jugar | to play (irregular u->ue) | verb | Vamos a jugar un rato.
+mostrar | to show (irregular o->ue) | verb | Muéstrame el camino.
+
+# Travel, Environment & Additional Nouns
+viaje | trip/journey | noun | ¡Feliz viaje!
+coche / carro/ auto | car | noun | Vamos en coche.
+tren | train | noun | El tren de alta velocidad.
+avión | airplane | noun | Nunca he viajado en avión.
+aeropuerto | airport | noun | Llegamos al aeropuerto temprano.
+boleto / billete | ticket | noun | Un billete de ida, por favor.
+equipaje | luggage | noun | Hemos perdido mi equipaje.
+hotel | hotel | noun | Un hotel de cinco estrellas.
+habitación | room | noun | Una habitación doble.
+reserva | reservation | noun | Tengo una reserva a mi nombre.
+mapa | map | noun | Mira el mapa en tu celular.
+calle | street | noun | Cruza la calle con cuidado.
+ciudad | city | noun | Es una ciudad muy ruidosa.
+pueblo | town/village | noun | Viven en un pueblo pequeño.
+campo | country/field | noun | Fin de semana en el campo.
+lugar | place | noun | Este es mi lugar favorito.
+país | country | noun | Visité tres países en Europa.
+mundo | world | noun | Quiero dar la vuelta al mundo.
+sol | sun | noun | Hoy hace mucho sol.
+luna | moon | noun | Hay luna llena esta noche.
+estrella | star | noun | Cuenta las estrellas.
+cielo | sky | noun | El cielo está muy azul.
+lluvia | rain | noun | La lluvia cae suavemente.
+nieve | snow | noun | Me encanta jugar en la nieve.
+viento | wind | noun | Hace un viento helado.
+árbol | tree | noun | El pájaro está en el árbol.
+flor | flower | noun | Le compré unas flores hermosas.
+río | river | noun | Nos bañamos en el río.
+lago | lake | noun | Tienen una casa en el lago.
+mar | sea | noun | Nadar en el mar.
+playa | beach | noun | Día soleado en la playa.
+montaña | mountain | noun | Subimos a la montaña.
+fuego | fire | noun | ¡Cuidado con el fuego!
+tierra | earth/land/dirt | noun | Tenemos los pies en la tierra.
+animal | animal | noun | Me gustan mucho los animales.
+perro | dog | noun | Saca a pasear al perro.
+gato | cat | noun | El gato duerme en el sofá.
+pájaro | bird | noun | El pájaro canta por la mañana.
+pez | fish (alive) | noun | En el acuario hay muchos peces.
+
+# Colors & Basic Qualities
+color | color | noun | ¿Cuál es tu color favorito?
+rojo | red | adjective | Tiene un vestido rojo.
+azul | blue | adjective | El cielo está más azul hoy.
+verde | green | adjective | La hierba es verde.
+amarillo | yellow | adjective | Un taxi amarillo brillante.
+negro | black | adjective | Un gato negro cruzó la calle.
+blanco | white | adjective | Nubes blancas en el cielo.
+gris | gray | adjective | Hoy es un día gris y triste.
+marrón | brown | adjective | Sus ojos son muy marrones.
+naranja | orange | adjective | Una camisa naranja neón.
+rosa | pink | adjective | Su cuarto está pintado de rosa.
+blanco/claro | clear/light (color) | adjective | Un azul muy claro.
+oscuro | dark (color) | adjective | Me gusta el azul oscuro.
+brillante | shiny/bright | adjective | Una estrella muy brillante.
+opaco | opaque/dull | adjective | Un cristal opaco.
+ruidoso | noisy/loud | adjective | Es un bar demasiado ruidoso.
+silencioso | quiet/silent | adjective | La biblioteca es muy silenciosa.
+suave | soft | adjective | Una manta muy suave.
+áspero | rough | adjective | Tiene las manos ásperas.
+dulce | sweet | adjective | Este postre es muy dulce.
+salado | salty | adjective | La sopa está muy salada.
+amargo | bitter | adjective | El café negro es muy amargo.
+picante | spicy | adjective | La salsa mexicana es picante.
+ácido | sour | adjective | El limón es muy ácido.
+
+# Final Extra Essential Words
+sistema | system | noun | El sistema está roto.
+problema | problem | noun | No hay ningún problema.
+programa | program | noun | Cuál es tu programa favorito.
+punto | point | noun | Llegaste al punto principal.
+estado | state/condition | noun | El estado de la economía.
+forma | shape/form/way | noun | Una forma diferente de ver las cosas.
+parte | part/portion | noun | Te toca esta parte.
+lugar | place | noun | Pon cada cosa en su lugar.
+caso | case | noun | En cualquier caso, no importa.
+vez | time/instance | noun | Había una vez...
+idea | idea | noun | ¡Qué buena idea!
+verdad | truth | noun | Dime la pura verdad.
+realidad | reality | noun | En realidad no sé.
+cambio | change | noun | El mundo necesita un cambio.
+razón | reason/right | noun | Tienes toda la razón del mundo.
+cuenta | account/bill | noun | La cuenta, por favor.
+modo | way/manner | noun | De este modo es más fácil.
+nivel | level | noun | Estás a un nivel avanzado.
+Fín | end | phrase | El fín justifica los medios.
+EOF

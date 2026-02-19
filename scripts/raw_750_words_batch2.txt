@@ -1,0 +1,85 @@
+
+# Health, Body & Emergencies
+cabeza | head | noun | Me duele la cabeza.
+mano | hand | noun | Dame la mano.
+ojo | eye | noun | Ella tiene los ojos azules.
+boca | mouth | noun | Cállate la boca.
+brazo | arm | noun | Se rompió el brazo.
+pierna | leg | noun | Me duelen las piernas de tanto correr.
+pie | foot | noun | Tengo frío en los pies.
+pelo | hair | noun | Tiene el pelo largo.
+cara | face | noun | Lávate la cara.
+espalda | back | noun | Me duele mucho la espalda.
+estómago | stomach | noun | Tengo dolor de estómago.
+corazón | heart | noun | Mi corazón late muy rápido.
+sangre | blood | noun | Sale mucha sangre.
+hueso | bone | noun | El perro está masticando un hueso.
+piel | skin | noun | Tengo la piel seca.
+dedo | finger/toe | noun | Me corté el dedo.
+enfermo | sick | adjective | Me siento muy enfermo.
+dolor | pain | noun | Tengo un dolor terrible.
+médico | doctor | noun | Tienes que ir al médico.
+hospital | hospital | noun | Mi abuela está en el hospital.
+farmacia | pharmacy | noun | Necesito ir a la farmacia.
+medicina | medicine | noun | Tómate la medicina.
+píldora | pill | noun | Una píldora para dormir.
+fiebre | fever | noun | El niño tiene fiebre alta.
+tos | cough | noun | Esa tos suena muy mal.
+gripe | flu | noun | Hay epidemia de gripe.
+resfriado | cold (illness) | noun | He cogido un buen resfriado.
+accidente | accident | noun | Vi un accidente de coche.
+ayuda | help | noun | ¡Necesito ayuda!
+policía | police | noun | ¡Llama a la policía!
+bombero | firefighter | noun | Los bomberos apagaron el fuego.
+peligro | danger | noun | ¡Peligro de muerte!
+cuidado | care/caution | noun | ¡Ten cuidado!
+seguro | safe/sure | adjective | Estás seguro aquí.
+urgencia | emergency | noun | Es una urgencia médica.
+salud | health | noun | El dinero no da la salud.
+vida | life | noun | Me salvó la vida.
+muerte | death | noun | Vida y muerte.
+
+# Business, Study, & Tech Essentials
+trabajo | work/job | noun | Busco trabajo.
+empresa | company | noun | Trabajo en una gran empresa.
+oficina | office | noun | Mi oficina está en el centro.
+jefe / jefa | boss | noun | Mi jefe es muy estricto.
+dinero | money | noun | No tengo dinero para eso.
+banco | bank | noun | Tengo que ir al banco hoy.
+precio | price | noun | ¿Cuál es el precio?
+mercado | market | noun | Compramos verduras en el mercado.
+tienda | store/shop | noun | Esa tienda cierra a las nueve.
+negocio | business | noun | Tienen un negocio familiar.
+cliente | customer/client | noun | El cliente siempre tiene la razón.
+computadora/ordenador | computer | noun | Uso la computadora todos los días.
+pantalla | screen | noun | La pantalla de mi móvil está rota.
+teclado | keyboard | noun | Necesito un teclado nuevo.
+ratón/mouse | mouse | noun | El ratón no funciona.
+internet | internet | noun | Se cayó la conexión a internet.
+correo / email | mail/email | noun | Te enviaré un correo mañana.
+mensaje | message | noun | Me dejó un mensaje de voz.
+red | network/net | noun | La red wifi no funciona.
+datos | data | noun | He perdido todos mis datos.
+escuela | school | noun | Los niños están en la escuela.
+universidad | university | noun | Estudia en la universidad.
+clase | class | noun | Tengo clase a las diez.
+profesor/profesora | teacher | noun | El profesor es muy aburrido.
+estudiante/alumno | student | noun | Soy estudiante universitario.
+libro | book | noun | Estoy leyendo un buen libro.
+cuaderno | notebook | noun | Escríbelo en tu cuaderno.
+lápiz | pencil | noun | ¿Me prestas un lápiz?
+bolígrafo | pen | noun | Necesito un bolígrafo azul.
+examen | exam/test | noun | Mañana tengo un examen importante.
+pregunta | question | noun | Tengo una pregunta.
+respuesta | answer | noun | No sé la respuesta.
+ejemplo | example | noun | Por ejemplo, los gatos.
+palabra | word | noun | ¿Qué significa esta palabra?
+idioma | language | noun | El español es un idioma hermoso.
+historia | history/story | noun | Me gusta la historia antigua.
+ciencia | science | noun | La biociencia es el futuro.
+arte | art | noun | Un museo de arte moderno.
+música | music | noun | Escucho música mientras estudio.
+canción | song | noun | Esa canción es mi favorita.
+película | movie | noun | ¿Qué película vamos a ver?
+juego | game | noun | Vamos a jugar un juego.
+equipo | team/equipment | noun | Nuestro equipo ganó.

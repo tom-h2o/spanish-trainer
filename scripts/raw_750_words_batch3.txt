@@ -1,0 +1,60 @@
+
+# Common Connectors & Prepositions
+con | with | preposition | Lo hice con cuidado.
+de | of/from | preposition | La casa de mi madre.
+a | to/at | preposition | Voy a dormir.
+en | in/on | preposition | Está en la caja.
+por | for/by | preposition | Comprado por diez euros.
+para | for/in order to | preposition | Es para ti.
+sin | without | preposition | Un café sin leche.
+sobre | about/on/over | preposition | Hablamos sobre política.
+entre | between/among | preposition | Está entre tú y yo.
+hasta | until/even | preposition | Trabajo hasta el viernes.
+desde | from/since | preposition | Te espero desde ayer.
+hacia | toward | preposition | Miró hacia la ventana.
+contra | against | preposition | Jugamos contra ellos.
+según | according to | preposition | Según las noticias, lloverá.
+bajo | under | preposition | El perro está bajo la mesa.
+ante | before/in the presence of | preposition | Temblaba ante el juez.
+tras | after/behind | preposition | Corrió tras el ladrón.
+durante | during | preposition | Llovió durante la noche.
+mediante | by means of | preposition | Lo pagó mediante transferencia.
+y/e | and | conjunction | Juan y María (Padre e hijo).
+o/u | or | conjunction | ¿Té o café? (Siete u ocho).
+pero | but | conjunction | Es tarde, pero me quedo.
+sino | but rather | conjunction | No es azul, sino verde.
+aunque | although/even though | conjunction | Saldré, aunque llueva.
+porque | because | conjunction | Lloro porque estoy triste.
+como | like/as/since | conjunction | Canta como un ángel.
+si | if/whether | conjunction | Dime si quieres venir.
+cuando | when | conjunction | Era joven cuando nos conocimos.
+mientras | while | conjunction | Escucha música mientras estudia.
+que | that/than | conjunction/pronoun | Quiero que vengas.
+donde | where | conjunction/adverb | Vamos donde tú quieras.
+quien | who/whom | pronoun | ¿Con quién fuiste?
+cual | which/who | pronoun | Esta es la casa en la cual nací.
+entonces | then | adverb/conjunction | Entonces, nos vamos.
+luego | later/then | adverb | Voy al banco y luego a casa.
+así | thus/so/this way | adverb | No lo hagas así.
+también | also/too | adverb | Yo también tengo hambre.
+tampoco | neither/not either | adverb | Yo tampoco sé.
+ya | already/anymore | adverb | Ya no creo en eso.
+todavía/aún | still/yet | adverb | ¿Todavía estás aquí?
+además | besides/in addition | adverb | Además, es muy caro.
+incluso | even/including | adverb/preposition | Incluso él lo sabe.
+tal vez / quizás | maybe/perhaps | adverb | Quizás tengas razón.
+siempre | always | adverb | Siempre dice la verdad.
+nunca/jamás | never | adverb | Jamás olvidaré este día.
+claro | of course/clear | adjective/adverb | ¡Claro que sí!
+bueno | well.../good | adjective/interjection | Bueno, me voy.
+pues | well/since | conjunction/interjection | Pues no lo sé.
+hola | hello | greeting | ¡Hola, qué tal!
+adiós | goodbye | greeting | ¡Adiós, hasta luego!
+gracias | thank you | greeting | Muchas gracias por todo.
+por favor | please | phrase | Un café, por favor.
+lo siento | I'm sorry | phrase | Lo siento mucho.
+perdón | excuse me/sorry | greeting | Perdón, me he equivocado.
+de nada | you're welcome | phrase | -¡Gracias! -De nada.
+vale | okay | phrase | Vale, nos vemos a las ocho.
+
+EOF

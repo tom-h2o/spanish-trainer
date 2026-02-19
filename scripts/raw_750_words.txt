@@ -1,0 +1,784 @@
+# Top 100 High-Frequency Words
+el/la | the | article | El perro y la gata juegan.
+un/una | a/an | article | Quiero una manzana y un plátano.
+de | of/from | preposition | Soy de Madrid.
+que | that/which | conjunction | El libro que leí es bueno.
+y | and | conjunction | Tú y yo somos amigos.
+en | in/on/at | preposition | Estamos en la casa.
+a | to/at | preposition | Voy a la escuela.
+ser | to be (regular irr.) | verb | Quiero ser doctor.
+él/ella | he/she | pronoun | Él es alto y ella es baja.
+no | no/not | adverb | No quiero salir hoy.
+tener | to have (irregular) | verb | Tengo un coche nuevo.
+un/uno | one | number | Solo tengo un hermano.
+por | for/by | preposition | Gracias por tu ayuda.
+con | with | preposition | Voy al cine con mis amigos.
+su | his/her/their | determiner | Su casa es muy grande.
+para | for/in order to | preposition | Este regalo es para ti.
+como | like/as | conjunction | Eres fuerte como un toro.
+estar | to be (irregular) | verb | Estoy muy cansado.
+me | me/myself | pronoun | Me gusta mucho la música.
+más | more | adverb | Quiero más agua, por favor.
+lo | it/him | pronoun | Lo vi ayer en el supermercado.
+o | or | conjunction | ¿Quieres té o café?
+pero | but | conjunction | Es caro, pero es bueno.
+hacer | to do/to make (irregular) | verb | Tengo que hacer mi tarea.
+le | to him/her/it | pronoun | Le di el libro a Juan.
+poder | to be able to/can (irregular o->ue) | verb | ¿Puedo ir al baño?
+decir | to say/tell (irregular e->i) | verb | Tienes que decir la verdad.
+este/esta | this | determiner | Este coche es muy rápido.
+ir | to go (irregular) | verb | Voy a ir a la playa mañana.
+otro/otra | another/other | adjective | Quiero otro trozo de pastel.
+ese/esa | that | determiner | Ese perro es muy amigable.
+la | the (fem) / her/it | pronoun | La vi en el parque.
+si | if | conjunction | Si llueve, no saldremos.
+me | to me/for me | pronoun | Me dio un regalo hermoso.
+ya | already/now | adverb | Ya terminé mi trabajo.
+ver | to see (irregular) | verb | Quiero ver esa película.
+porque | because | conjunction | No fui porque estaba enfermo.
+dar | to give (irregular) | verb | Te voy a dar un consejo.
+cuando | when | conjunction | Te llamaré cuando llegue.
+muy | very | adverb | Estoy muy feliz hoy.
+sin | without | preposition | No puedo vivir sin ti.
+vez | time/instance | noun | Es la primera vez que vengo aquí.
+mucho | much/a lot | adjective | Hace mucho calor hoy.
+saber | to know (irregular) | verb | No sé la respuesta.
+qué | what | pronoun | ¿Qué quieres comer?
+sobre | on/over/about | preposition | El libro está sobre la mesa.
+mi | my | determiner | Mi coche es azul.
+al | to the (a + el) | preposition | Voy al parque todos los días.
+todo | all/every | adjective | Todo el mundo está aquí.
+también | also/too | adverb | Yo también quiero un helado.
+hasta | until/even | preposition | Trabajo hasta las cinco.
+hay | there is/there are (from haber) | verb | Hay mucha gente en la fiesta.
+año | year | noun | Feliz año nuevo.
+dos | two | number | Tengo dos perros.
+querer | to want/love (irregular e->ie) | verb | Quiero un café, por favor.
+entre | between/among | preposition | El banco está entre la farmacia y el supermercado.
+así | like this/so | adverb | Hazlo así, es más fácil.
+primero | first | adjective | Es mi primer día de trabajo.
+desde | from/since | preposition | Vivo aquí desde 2010.
+grande | big/large | adjective | Su casa es muy grande.
+nos | us/to us | pronoun | Nos gusta ir a la playa.
+llegar | to arrive (regular -ar) | verb | El tren va a llegar pronto.
+pasar | to pass/happen/spend time (regular -ar) | verb | ¿Qué pasa aquí?
+sí | yes | adverb | Sí, quiero ir contigo.
+ni | nor/neither | conjunction | No quiero ni té ni café.
+nosotros | we/us | pronoun | Nosotros somos estudiantes.
+tiempo | time/weather | noun | No tengo mucho tiempo libre.
+mismo | same | adjective | Tenemos el mismo problema.
+bien | well/fine | adverb | Todo está muy bien.
+día | day | noun | ¡Buenos días!
+donde | where | conjunction | ¿Dónde está el baño?
+ahora | now | adverb | Tengo que irme ahora.
+poco | little/few | adjective | Tengo poco dinero en efectivo.
+cada | each/every | adjective | Leo un libro cada mes.
+vida | life | noun | La vida es hermosa.
+entonces | then/so | adverb | Entonces, ¿qué hacemos?
+menos | less/fewer | adverb | Cuesta menos de diez euros.
+nuevo | new | adjective | Tengo un coche nuevo.
+solo/solamente | only/just | adverb | Solo quiero un vaso de agua.
+tan | so/as | adverb | Es tan alto como su padre.
+cosa | thing | noun | ¿Qué es esa cosa?
+parte | part/portion | noun | Leí la primera parte del libro.
+después | after/later | adverb | Te llamaré después de la cena.
+alguno/algún | some/someone | adjective | ¿Tienes algún problema?
+siempre | always | adverb | Siempre llego tarde.
+creer | to believe/think (regular -er) | verb | Creo que va a llover.
+encontrar | to find (irregular o->ue) | verb | No puedo encontrar mis llaves.
+forma | form/shape/way | noun | Esta es la mejor forma de hacerlo.
+nada | nothing/anything | pronoun | No hay nada en la nevera.
+hombre | man | noun | Ese hombre es mi tío.
+bien | good/fine | adjective | Está bien.
+mujer | woman | noun | Esa mujer es muy inteligente.
+algo | something/anything | pronoun | Necesito algo para comer.
+parecer | to seem/appear (irregular) | verb | Me parece una buena idea.
+queda | remains/is located | verb | La tienda queda cerca de aquí.
+
+# Essential Regular Verbs
+hablar | to talk/speak (regular -ar) | verb | Quiero hablar contigo.
+tomar | to take/drink (regular -ar) | verb | Voy a tomar un café.
+trabajar | to work (regular -ar) | verb | Trabajo todos los días.
+esperar | to wait/hope (regular -ar) | verb | Espero que tengas un buen día.
+mirar | to look/watch (regular -ar) | verb | Mira ese pájaro.
+comprar | to buy (regular -ar) | verb | Quiero comprar un libro.
+necesitar | to need (regular -ar) | verb | Necesito más tiempo.
+terminar | to finish (regular -ar) | verb | Ya terminé mi tarea.
+explicar | to explain (regular -ar) | verb | ¿Puedes explicar esto?
+preguntar | to ask (regular -ar) | verb | Quiero hacerte una pregunta.
+estudiar | to study (regular -ar) | verb | Estudio español en la escuela.
+escuchar | to listen (regular -ar) | verb | Escucha esta canción.
+viajar | to travel (regular -ar) | verb | Me encanta viajar.
+llamar | to call (regular -ar) | verb | Te voy a llamar mañana.
+ayudar | to help (regular -ar) | verb | ¿Me puedes ayudar?
+enseñar | to teach/show (regular -ar) | verb | Ella me va a enseñar a bailar.
+ganar | to win/earn (regular -ar) | verb | Nuestro equipo ganó el partido.
+comer | to eat (regular -er) | verb | Me gusta comer pollo.
+beber | to drink (regular -er) | verb | Vamos a beber unas cervezas.
+comprender | to understand (regular -er) | verb | No comprendo.
+aprender | to learn (regular -er) | verb | Quiero aprender más español.
+vender | to sell (regular -er) | verb | Él vende coches usados.
+leer | to read (regular -er) | verb | Leo un libro cada semana.
+correr | to run (regular -er) | verb | Corro en el parque todas las mañanas.
+esconder | to hide (regular -er) | verb | No te escondas.
+prometer | to promise (regular -er) | verb | Te prometo que iré.
+romper | to break (regular -er, irreg part) | verb | ¡No rompas el vaso!
+responder | to answer (regular -er) | verb | Responde a mi pregunta.
+creer | to believe/think (regular -er) | verb | Creo en ti.
+vivir | to live (regular -ir) | verb | Vivo en Barcelona.
+escribir | to write (regular -ir, irreg part) | verb | Ella escribe poemas.
+abrir | to open (regular -ir, irreg part) | verb | Abre la ventana, por favor.
+recibir | to receive (regular -ir) | verb | Recibí tu carta.
+decidir | to decide (regular -ir) | verb | Tienes que decidir pronto.
+subir | to go up/climb (regular -ir) | verb | Sube las escaleras.
+sufrir | to suffer (regular -ir) | verb | No quiero sufrir más.
+ocurrir | to happen/occur (regular -ir) | verb | Ese accidente ocurrió ayer.
+añadir | to add (regular -ir) | verb | Añade un poco de sal.
+
+# Essential Irregular & Stem-Changing Verbs
+ser | to be (irregular) | verb | Mi padre es alto.
+estar | to be (irregular) | verb | Estoy en casa.
+tener | to have (irregular) | verb | Tengo dos hermanos.
+hacer | to do/to make (irregular) | verb | ¿Qué estás haciendo?
+poder | to be able to/can (irregular o->ue) | verb | ¿Puedes ayudarme?
+decir | to say/to tell (irregular e->i) | verb | Dime la verdad.
+ir | to go (irregular) | verb | Vamos al cine esta noche.
+ver | to see (irregular) | verb | Quiero ver la televisión.
+dar | to give (irregular) | verb | Te doy mi palabra.
+saber | to know facts/how to (irregular) | verb | Lo sé todo.
+querer | to want/to love (irregular e->ie) | verb | Te quiero mucho.
+pensar | to think (irregular e->ie) | verb | Pienso que es una buena idea.
+encontrar | to find (irregular o->ue) | verb | No la encuentro.
+volver | to return/go back (irregular o->ue) | verb | Vuelvo a las seis.
+salir | to leave/go out (irregular) | verb | Salgo con mis amigos.
+conocer | to know people/places (irregular) | verb | Conozco bien esa ciudad.
+empezar | to begin/start (irregular e->ie) | verb | La película empieza ahora.
+entender | to understand (irregular e->ie) | verb | No entiendo el problema.
+pedir | to ask for/request (irregular e->i) | verb | Voy a pedir una pizza.
+sentir | to feel/regret (irregular e->ie) | verb | Lo siento mucho.
+dormir | to sleep (irregular o->ue) | verb | Quiero dormir ahora.
+seguir | to follow/continue (irregular e->i) | verb | Sígueme, por favor.
+venir | to come (irregular e->ie) | verb | Ven aquí.
+traer | to bring (irregular) | verb | ¿Me traes un vaso de agua?
+poner | to put/place (irregular) | verb | Pon el libro en la mesa.
+jugar | to play (irregular u->ue) | verb | Jugamos al fútbol los domingos.
+cerrar | to close (irregular e->ie) | verb | Cierra la puerta.
+recordar | to remember/remind (irregular o->ue) | verb | Recuerdo tu cara.
+mostrar | to show (irregular o->ue) | verb | Enséñame tu nuevo coche.
+perder | to lose/miss (irregular e->ie) | verb | No quiero perderte.
+caer | to fall (irregular) | verb | Las hojas caen en otoño.
+oír | to hear/listen (irregular) | verb | No te oigo bien.
+conseguir | to get/obtain (irregular e->i) | verb | Consiguió un nuevo trabajo.
+servir | to serve (irregular e->i) | verb | Esta herramienta no sirve.
+repetir | to repeat (irregular e->i) | verb | Por favor, repita la pregunta.
+reír | to laugh (irregular e->i) | verb | Me hace reír.
+costar | to cost (irregular o->ue) | verb | ¿Cuánto cuesta este coche?
+medir | to measure (irregular e->i) | verb | Mide dos metros de altura.
+
+# Core Adjectives & Adverbs
+bueno/buen | good | adjective | Es un buen perro.
+malo/mal | bad | adjective | Hace mal tiempo.
+grande/gran | big | adjective | Es un gran problema.
+pequeño | small | adjective | Este coche es muy pequeño.
+nuevo | new | adjective | Mi coche es nuevo.
+viejo | old | adjective | Tengo un coche viejo.
+alto | tall/high | adjective | Mi hermano es muy alto.
+bajo | short/low | adjective | El techo es muy bajo.
+largo | long | adjective | El camino es largo.
+corto | short (length) | adjective | El pelo de Juan es corto.
+fácil | easy | adjective | El examen fue muy fácil.
+difícil | hard/difficult | adjective | Aprender chino es difícil.
+feliz | happy | adjective | Estoy muy feliz hoy.
+triste | sad | adjective | La película fue muy triste.
+rápido | fast/quick | adjective | Corre muy rápido.
+lento | slow | adjective | Esta tortuga es lenta.
+caliente | hot | adjective | El café está muy caliente.
+frío | cold | adjective | Hace mucho frío hoy.
+bonito | pretty/beautiful | adjective | Qué vestido tan bonito.
+feo | ugly | adjective | Ese edificio es muy feo.
+caro | expensive | adjective | Ese coche es demasiado caro.
+barato | cheap | adjective | Compré esto muy barato.
+rico | rich/delicious | adjective | La comida está muy rica.
+pobre | poor | adjective | Ellos son de una familia pobre.
+fuerte | strong | adjective | Él es muy fuerte.
+débil | weak | adjective | Me siento un poco débil.
+joven | young | adjective | Es demasiado joven para conducir.
+mayor | older/larger | adjective | Mi hermano mayor vive en Madrid.
+mejor | better/best | adjective | Él es mi mejor amigo.
+peor | worse/worst | adjective | Fue el peor día de mi vida.
+aquí | here | adverb | Ven aquí, por favor.
+allí/allá | there | adverb | Mi casa está allí.
+cerca | close/near | adverb | Vivo cerca de la escuela.
+lejos | far | adverb | El supermercado está lejos.
+antes | before | adverb | Tienes que terminar antes de mañana.
+después | after/afterward | adverb | Vamos a comer después.
+siempre | always | adverb | Siempre me levanto temprano.
+nunca | never | adverb | Nunca he estado en España.
+pronto | soon | adverb | Te veré muy pronto.
+tarde | late/afternoon | adverb | Llegué demasiado tarde al tren.
+temprano | early | adverb | Mañana me levantaré temprano.
+mucho | much/a lot/very | adverb | Trabajo mucho todos los días.
+poco | little/not much | adverb | Queda poco tiempo.
+bastante | enough/quite | adverb | Es bastante inteligente.
+demasiado | too much/too | adverb | Comí demasiado pastel.
+solo/solamente | only/just | adverb | Solo quiero un café.
+todavía/aún | still/yet | adverb | Todavía no he terminado.
+ya | already/now/yet | adverb | Ya son las diez y media.
+también | also/too | adverb | Yo también hablo inglés.
+tampoco | neither/not either | adverb | Él no sabe, y yo tampoco.
+así | like this/so/thus | adverb | Lo hice así.
+bien | well | adverb | Cantas muy bien.
+mal | badly/poorly | adverb | El coche funciona mal.
+quizás/tal vez | maybe/perhaps | adverb | Quizás llueva mañana.
+seguro | sure/safe | adjective | Estoy seguro de que vendrá.
+
+# Time, Numbers, & Calendar
+uno | one | number | Solo quiero un helado.
+dos | two | number | Tengo dos hermanos.
+tres | three | number | Hay tres libros en la mesa.
+cuatro | four | number | Las cuatro de la tarde.
+cinco | five | number | Cinco minutos más.
+seis | six | number | Seis personas vinieron a la cena.
+siete | seven | number | Trabajo los siete días de la semana.
+ocho | eight | number | Duermo ocho horas diarias.
+nueve | nine | number | Nueve de cada diez dentistas lo recomiendan.
+diez | ten | number | Diez euros, por favor.
+veinte | twenty | number | Cuesta veinte dólares.
+treinta | thirty | number | Tengo treinta años.
+cuarenta | forty | number | Somos cuarenta en la clase.
+cincuenta | fifty | number | El abrigo cuesta cincuenta euros.
+cien | hundred | number | Más de cien personas asistieron.
+primero | first | adjective | Mi primera lección.
+segundo | second | adjective | El segundo piso.
+tercero | third | adjective | Vive en el tercer piso.
+lunes | Monday | noun | Nos vemos el lunes.
+martes | Tuesday | noun | El martes tengo una reunión.
+miércoles | Wednesday | noun | El miércoles es mi cumpleaños.
+jueves | Thursday | noun | Salimos este jueves.
+viernes | Friday | noun | Por fin es viernes.
+sábado | Saturday | noun | El sábado vamos a la playa.
+domingo | Sunday | noun | Los domingos descanso.
+enero | January | noun | Hace frío en enero.
+febrero | February | noun | Mi cumpleaños es en febrero.
+marzo | March | noun | La primavera empieza en marzo.
+abril | April | noun | Lluvias de abril.
+mayo | May | noun | Mi madre nació en mayo.
+junio | June | noun | Terminamos las clases en junio.
+julio | July | noun | Nos vamos de vacaciones en julio.
+agosto | August | noun | Hace mucho calor en agosto.
+septiembre | September | noun | En septiembre vuelvo al trabajo.
+octubre | October | noun | Halloween es en octubre.
+noviembre | November | noun | Noviembre es un mes frío.
+diciembre | December | noun | Navidad es en diciembre.
+hoy | today | adverb | Hoy es un buen día.
+ayer | yesterday | adverb | Ayer llovió mucho.
+mañana | tomorrow/morning | noun | Mañana será otro día.
+noche | night | noun | Buenas noches.
+tarde | afternoon | noun | Buenas tardes.
+semana | week | noun | Nos vemos la próxima semana.
+mes | month | noun | El próximo mes viajo a España.
+año | year | noun | Feliz año nuevo.
+hora | hour | noun | Tienes una hora para terminar.
+minuto | minute | noun | Dame un minuto.
+segundo | second | noun | Espera un segundo.
+reloj | clock/watch | noun | Mi reloj está roto.
+vez | time/instance | noun | Es la primera vez que vengo.
+siempre | always | adverb | Siempre llego a tiempo.
+nunca | never | adverb | Nunca bebo alcohol.
+próximo | next | adjective | El próximo tren sale a las seis.
+pasado | past/last | adjective | El fin de semana pasado estuve enfermo.
+ahora | now | adverb | Tienes que venir ahora.
+ya | already/now | adverb | Ya son las diez.
+todavía | still/yet | adverb | Todavía estoy trabajando.
+
+# People, Family, & Home
+hombre | man | noun | Ese hombre es muy alto.
+mujer | woman | noun | Aquella mujer es mi profesora.
+niño/niña | boy/girl | noun | Los niños juegan en el parque.
+padre | father | noun | Mi padre es médico.
+madre | mother | noun | Mi madre cocina muy bien.
+hermano/hermana | brother/sister | noun | Tengo un hermano menor.
+hijo/hija | son/daughter | noun | Ellas son mis hijas.
+abuelo/abuela | grandfather/grandmother | noun | Mis abuelos viven en el campo.
+tío/tía | uncle/aunt | noun | Mi tía me compró un regalo.
+pronto/prima | cousin | noun | Mis primos vienen esta tarde.
+amigo/amiga | friend | noun | Él es mi mejor amigo.
+novio/novia | boyfriend/girlfriend | noun | Ella es mi novia.
+esposo/esposa | husband/wife | noun | Su esposo trabaja en un banco.
+familia | family | noun | Mi familia es muy grande.
+persona | person | noun | Ella es una buena persona.
+gente | people | noun | Hay mucha gente en la calle.
+señor/señora | Mr./Mrs. | noun | El señor García está aquí.
+casa | house/home | noun | Vivo en una casa blanca.
+apartamento | apartment | noun | Mi apartamento es pequeño.
+habitación | room/bedroom | noun | Mi habitación está limpia.
+baño | bathroom | noun | ¿Dónde está el baño?
+cocina | kitchen | noun | La cocina huele muy bien.
+sala | living room | noun | Vemos la televisión en la sala.
+puerta | door | noun | Cierra la puerta, por favor.
+ventana | window | noun | Abre la ventana, hace calor.
+mesa | table | noun | La comida está en la mesa.
+silla | chair | noun | Por favor, siéntate en esta silla.
+cama | bed | noun | Estoy cansado, me voy a la cama.
+mueble | piece of furniture | noun | Necesitamos muebles nuevos.
+televisión | television | noun | Están viendo la televisión.
+radio | radio | noun | Me gusta escuchar la radio.
+teléfono | phone/telephone | noun | Sonó el teléfono.
+ropa | clothes/clothing | noun | Tengo que comprar ropa nueva.
+camisa | shirt | noun | Llevo una camisa azul.
+pantalones | pants/trousers | noun | Estos pantalones son muy grandes.
+zapato | shoe | noun | Me gustan tus zapatos nuevos.
+vestido | dress | noun | Lleva un vestido rojo.
+abrigo | coat | noun | Ponte el abrigo, hace frío.
+sombrero | hat | noun | Me gusta tu sombrero.
+gafas | glasses | noun | No puedo ver sin mis gafas.
+
+# Food, Dining, & Travel
+agua | water | noun | Un vaso de agua, por favor.
+comida | food/meal | noun | La comida está servida.
+pan | bread | noun | Necesito comprar pan.
+carne | meat | noun | No como carne, soy vegetariano.
+pescado | fish | noun | Hoy cenamos pescado.
+pollo | chicken | noun | El pollo asado huele bien.
+queso | cheese | noun | Me encantan los macarrones con queso.
+huevo | egg | noun | Desayuno dos huevos todos los días.
+fruta | fruit | noun | Debes comer más fruta.
+manzana | apple | noun | Una manzana al día.
+naranja | orange | noun | Quiero un zumo de naranja.
+plátano | banana | noun | Los monos comen plátanos.
+tomate | tomato | noun | Ensalada de tomate y lechuga.
+cebolla | onion | noun | Lloré cortando la cebolla.
+patata | potato | noun | Tortilla de patatas, por favor.
+arroz | rice | noun | Me gusta el arroz blanco.
+sal | salt | noun | ¿Me pasas la sal?
+azúcar | sugar | noun | Un café sin azúcar.
+aceite | oil | noun | Aceite de oliva español.
+leche | milk | noun | Leche fría o caliente.
+café | coffee | noun | Necesito un café fuerte.
+té | tea | noun | Me gusta el té verde.
+vino | wine | noun | Una botella de vino tinto.
+cerveza | beer | noun | Dos cervezas frías, por favor.
+desayuno | breakfast | noun | ¿Qué hay para el desayuno?
+almuerzo | lunch | noun | La hora del almuerzo es a la una.
+cena | dinner | noun | ¿Qué vamos a cenar?
+viaje | trip/journey | noun | ¡Buen viaje!
+coche | car | noun | Voy en coche al trabajo.
+autobús | bus | noun | El autobús llega en cinco minutos.
+tren | train | noun | El tren sale de la vía tres.
+avión | airplane | noun | Tengo miedo a volar en avión.
+bicicleta | bicycle | noun | Me gusta pasear en bicicleta.
+calle | street | noun | Vivo en la calle mayor.
+camino | road/path | noun | Este camino va al lago.
+estación | station | noun | ¿Dónde está la estación de tren?
+aeropuerto | airport | noun | Voy al aeropuerto a recogerla.
+billete | ticket/bill | noun | Un billete de ida y vuelta.
+hotel | hotel | noun | Nos alojamos en un hotel céntrico.
+restaurante | restaurant | noun | Conozco un restaurante muy bueno.
+ciudad | city | noun | Madrid es una ciudad hermosa.
+pueblo | town/village | noun | Crecí en un pueblo pequeño.
+país | country | noun | España es un país de Europa.
+mundo | world | noun | Quiero viajar por todo el mundo.
+playa | beach | noun | Vamos a la playa este verano.
+mar | sea | noun | El mar está muy tranquilo hoy.
+montaña | mountain | noun | Nos fuimos de excursión a la montaña.
+
+# Health, Body & Emergencies
+cabeza | head | noun | Me duele la cabeza.
+mano | hand | noun | Dame la mano.
+ojo | eye | noun | Ella tiene los ojos azules.
+boca | mouth | noun | Cállate la boca.
+brazo | arm | noun | Se rompió el brazo.
+pierna | leg | noun | Me duelen las piernas de tanto correr.
+pie | foot | noun | Tengo frío en los pies.
+pelo | hair | noun | Tiene el pelo largo.
+cara | face | noun | Lávate la cara.
+espalda | back | noun | Me duele mucho la espalda.
+estómago | stomach | noun | Tengo dolor de estómago.
+corazón | heart | noun | Mi corazón late muy rápido.
+sangre | blood | noun | Sale mucha sangre.
+hueso | bone | noun | El perro está masticando un hueso.
+piel | skin | noun | Tengo la piel seca.
+dedo | finger/toe | noun | Me corté el dedo.
+enfermo | sick | adjective | Me siento muy enfermo.
+dolor | pain | noun | Tengo un dolor terrible.
+médico | doctor | noun | Tienes que ir al médico.
+hospital | hospital | noun | Mi abuela está en el hospital.
+farmacia | pharmacy | noun | Necesito ir a la farmacia.
+medicina | medicine | noun | Tómate la medicina.
+píldora | pill | noun | Una píldora para dormir.
+fiebre | fever | noun | El niño tiene fiebre alta.
+tos | cough | noun | Esa tos suena muy mal.
+gripe | flu | noun | Hay epidemia de gripe.
+resfriado | cold (illness) | noun | He cogido un buen resfriado.
+accidente | accident | noun | Vi un accidente de coche.
+ayuda | help | noun | ¡Necesito ayuda!
+policía | police | noun | ¡Llama a la policía!
+bombero | firefighter | noun | Los bomberos apagaron el fuego.
+peligro | danger | noun | ¡Peligro de muerte!
+cuidado | care/caution | noun | ¡Ten cuidado!
+seguro | safe/sure | adjective | Estás seguro aquí.
+urgencia | emergency | noun | Es una urgencia médica.
+salud | health | noun | El dinero no da la salud.
+vida | life | noun | Me salvó la vida.
+muerte | death | noun | Vida y muerte.
+
+# Business, Study, & Tech Essentials
+trabajo | work/job | noun | Busco trabajo.
+empresa | company | noun | Trabajo en una gran empresa.
+oficina | office | noun | Mi oficina está en el centro.
+jefe / jefa | boss | noun | Mi jefe es muy estricto.
+dinero | money | noun | No tengo dinero para eso.
+banco | bank | noun | Tengo que ir al banco hoy.
+precio | price | noun | ¿Cuál es el precio?
+mercado | market | noun | Compramos verduras en el mercado.
+tienda | store/shop | noun | Esa tienda cierra a las nueve.
+negocio | business | noun | Tienen un negocio familiar.
+cliente | customer/client | noun | El cliente siempre tiene la razón.
+computadora/ordenador | computer | noun | Uso la computadora todos los días.
+pantalla | screen | noun | La pantalla de mi móvil está rota.
+teclado | keyboard | noun | Necesito un teclado nuevo.
+ratón/mouse | mouse | noun | El ratón no funciona.
+internet | internet | noun | Se cayó la conexión a internet.
+correo / email | mail/email | noun | Te enviaré un correo mañana.
+mensaje | message | noun | Me dejó un mensaje de voz.
+red | network/net | noun | La red wifi no funciona.
+datos | data | noun | He perdido todos mis datos.
+escuela | school | noun | Los niños están en la escuela.
+universidad | university | noun | Estudia en la universidad.
+clase | class | noun | Tengo clase a las diez.
+profesor/profesora | teacher | noun | El profesor es muy aburrido.
+estudiante/alumno | student | noun | Soy estudiante universitario.
+libro | book | noun | Estoy leyendo un buen libro.
+cuaderno | notebook | noun | Escríbelo en tu cuaderno.
+lápiz | pencil | noun | ¿Me prestas un lápiz?
+bolígrafo | pen | noun | Necesito un bolígrafo azul.
+examen | exam/test | noun | Mañana tengo un examen importante.
+pregunta | question | noun | Tengo una pregunta.
+respuesta | answer | noun | No sé la respuesta.
+ejemplo | example | noun | Por ejemplo, los gatos.
+palabra | word | noun | ¿Qué significa esta palabra?
+idioma | language | noun | El español es un idioma hermoso.
+historia | history/story | noun | Me gusta la historia antigua.
+ciencia | science | noun | La biociencia es el futuro.
+arte | art | noun | Un museo de arte moderno.
+música | music | noun | Escucho música mientras estudio.
+canción | song | noun | Esa canción es mi favorita.
+película | movie | noun | ¿Qué película vamos a ver?
+juego | game | noun | Vamos a jugar un juego.
+equipo | team/equipment | noun | Nuestro equipo ganó.
+
+# Common Connectors & Prepositions
+con | with | preposition | Lo hice con cuidado.
+de | of/from | preposition | La casa de mi madre.
+a | to/at | preposition | Voy a dormir.
+en | in/on | preposition | Está en la caja.
+por | for/by | preposition | Comprado por diez euros.
+para | for/in order to | preposition | Es para ti.
+sin | without | preposition | Un café sin leche.
+sobre | about/on/over | preposition | Hablamos sobre política.
+entre | between/among | preposition | Está entre tú y yo.
+hasta | until/even | preposition | Trabajo hasta el viernes.
+desde | from/since | preposition | Te espero desde ayer.
+hacia | toward | preposition | Miró hacia la ventana.
+contra | against | preposition | Jugamos contra ellos.
+según | according to | preposition | Según las noticias, lloverá.
+bajo | under | preposition | El perro está bajo la mesa.
+ante | before/in the presence of | preposition | Temblaba ante el juez.
+tras | after/behind | preposition | Corrió tras el ladrón.
+durante | during | preposition | Llovió durante la noche.
+mediante | by means of | preposition | Lo pagó mediante transferencia.
+y/e | and | conjunction | Juan y María (Padre e hijo).
+o/u | or | conjunction | ¿Té o café? (Siete u ocho).
+pero | but | conjunction | Es tarde, pero me quedo.
+sino | but rather | conjunction | No es azul, sino verde.
+aunque | although/even though | conjunction | Saldré, aunque llueva.
+porque | because | conjunction | Lloro porque estoy triste.
+como | like/as/since | conjunction | Canta como un ángel.
+si | if/whether | conjunction | Dime si quieres venir.
+cuando | when | conjunction | Era joven cuando nos conocimos.
+mientras | while | conjunction | Escucha música mientras estudia.
+que | that/than | conjunction/pronoun | Quiero que vengas.
+donde | where | conjunction/adverb | Vamos donde tú quieras.
+quien | who/whom | pronoun | ¿Con quién fuiste?
+cual | which/who | pronoun | Esta es la casa en la cual nací.
+entonces | then | adverb/conjunction | Entonces, nos vamos.
+luego | later/then | adverb | Voy al banco y luego a casa.
+así | thus/so/this way | adverb | No lo hagas así.
+también | also/too | adverb | Yo también tengo hambre.
+tampoco | neither/not either | adverb | Yo tampoco sé.
+ya | already/anymore | adverb | Ya no creo en eso.
+todavía/aún | still/yet | adverb | ¿Todavía estás aquí?
+además | besides/in addition | adverb | Además, es muy caro.
+incluso | even/including | adverb/preposition | Incluso él lo sabe.
+tal vez / quizás | maybe/perhaps | adverb | Quizás tengas razón.
+siempre | always | adverb | Siempre dice la verdad.
+nunca/jamás | never | adverb | Jamás olvidaré este día.
+claro | of course/clear | adjective/adverb | ¡Claro que sí!
+bueno | well.../good | adjective/interjection | Bueno, me voy.
+pues | well/since | conjunction/interjection | Pues no lo sé.
+hola | hello | greeting | ¡Hola, qué tal!
+adiós | goodbye | greeting | ¡Adiós, hasta luego!
+gracias | thank you | greeting | Muchas gracias por todo.
+por favor | please | phrase | Un café, por favor.
+lo siento | I'm sorry | phrase | Lo siento mucho.
+perdón | excuse me/sorry | greeting | Perdón, me he equivocado.
+de nada | you're welcome | phrase | -¡Gracias! -De nada.
+vale | okay | phrase | Vale, nos vemos a las ocho.
+
+EOF
+
+# Core Adjectives & Adverbs
+feliz | happy | adjective | Ella siempre está feliz.
+triste | sad | adjective | Hoy me siento un poco triste.
+cansado | tired | adjective | Estoy muy cansado de trabajar.
+enfermo | sick | adjective | No voy porque estoy enfermo.
+sano | healthy | adjective | Comer fruta te mantiene sano.
+fuerte | strong | adjective | Es un hombre muy fuerte.
+débil | weak | adjective | Me siento débil.
+inteligente | intelligent/smart | adjective | Mi hija es muy inteligente.
+tonto | silly/dumb | adjective | No seas tonto.
+rápido | fast/quick | adjective | Este coche es muy rápido.
+lento | slow | adjective | El autobús va muy lento.
+caro | expensive | adjective | Esa casa es demasiado cara.
+barato | cheap | adjective | Encontré zapatos muy baratos.
+limpio | clean | adjective | Mi habitación está limpia.
+sucio | dirty | adjective | Tienes los zapatos sucios.
+lleno | full | adjective | El cine estaba lleno.
+vacío | empty | adjective | El vaso está vacío.
+abierto | open | adjective | La puerta está abierta.
+cerrado | closed | adjective | El museo está cerrado los lunes.
+fácil | easy | adjective | El examen fue muy fácil.
+difícil | difficult/hard | adjective | Aprender ruso es muy difícil.
+posible | possible | adjective | Creo que es posible.
+imposible | impossible | adjective | Eso es imposible de hacer.
+seguro | sure/safe | adjective | Estoy seguro de que vendrá.
+peligroso | dangerous | adjective | Conducir rápido es peligroso.
+importante | important | adjective | Tenemos una reunión importante.
+mismo | same | adjective | Tenemos el mismo coche.
+distinto | different | adjective | Somos de países distintos.
+único | only/unique | adjective | Es mi único hermano.
+solo | alone/lonely | adjective | No me gusta estar solo.
+próximo | next | adjective | Nos vemos la próxima semana.
+último | last/final | adjective | Es la última vez que te lo digo.
+anterior | previous | adjective | En la página anterior.
+siguiente | following/next | adjective | Lea el siguiente párrafo.
+cierto | true/certain | adjective | Eso no es cierto.
+falso | false/fake | adjective | Las noticias eran falsas.
+claro | clear/light | adjective | El agua está muy clara.
+oscuro | dark | adjective | El cuarto está oscuro.
+pesado | heavy | adjective | Esta caja es muy pesada.
+ligero | light (weight) | adjective | Necesito equipaje ligero.
+duro | hard | adjective | Este pan está muy duro.
+suave | soft/smooth | adjective | Tiene la piel muy suave.
+frío | cold | adjective | El invierno es frío.
+caliente | hot | adjective | Ten cuidado, el plato está caliente.
+seco | dry | adjective | Necesito un paño seco.
+mojado | wet | adjective | Estoy mojado por la lluvia.
+rico | rich/delicious | adjective | La comida está rica.
+pobre | poor | adjective | Viven en un país pobre.
+joven | young | adjective | Ella es muy joven aún.
+viejo | old | adjective | Mi coche es viejo, pero funciona.
+nuevo | new | adjective | Compré un libro nuevo.
+alto | tall/high | adjective | El edificio es muy alto.
+bajo | short/low | adjective | El techo de la casa es bajo.
+largo | long | adjective | Tiene el pelo largo.
+corto | short (length) | adjective | El camino más corto es por aquí.
+ancho | wide/broad | adjective | Es un río muy ancho.
+estrecho | narrow | adjective | La calle es muy estrecha.
+bueno | good | adjective | Este es un buen amigo.
+malo | bad | adjective | Hace muy mal tiempo.
+mejor | better/best | adjective | Ella es la mejor estudiante.
+peor | worse/worst | adjective | Fue el peor viaje de mi vida.
+mayor | older/larger | adjective | Mi hermano mayor vive lejos.
+menor | younger/smaller | adjective | Mi hermana menor va a la escuela.
+
+# Time, Numbers, & Calendar
+hoy | today | adverb | Hoy hace un día precioso.
+ayer | yesterday | adverb | Ayer trabajé mucho.
+mañana | tomorrow/morning | noun | Mañana nos vemos.
+ahora | now | adverb | Tienes que salir ahora mismo.
+antes | before | adverb | Tuviste que decírmelo antes.
+después | after/later | adverb | Te llamo después.
+siempre | always | adverb | Siempre me acuesto tarde.
+nunca | never | adverb | Nunca he estado allí.
+pronto | soon | adverb | Espero verte pronto.
+tarde | late/afternoon | adverb | Llegaste muy tarde al tren.
+temprano | early | adverb | Me levanto muy temprano.
+ya | already/now | adverb | Ya he terminado el trabajo.
+todavía | still | adverb | ¿Todavía estás comiendo?
+aún | still/yet | adverb | Aún no, espérate.
+entonces | then | adverb | Entonces, ¿qué hacemos?
+mientras | while | conjunction | Escucho música mientras estudio.
+durante | during | preposition | Me dormí durante la película.
+vez | time/instance | noun | Es la primera vez que vengo.
+veces | times | noun | Fui allí muchas veces.
+hora | hour/time | noun | ¿Qué hora es?
+minuto | minute | noun | Faltan cinco minutos.
+segundo | second | noun | Espera un segundo.
+día | day | noun | Buenos días.
+semana | week | noun | Nos vamos de vacaciones la próxima semana.
+mes | month | noun | Enero es el primer mes del año.
+año | year | noun | Feliz Año Nuevo.
+siglo | century | noun | Vivimos en el siglo veintiuno.
+estación | season/station | noun | El verano es mi estación favorita.
+primavera | spring | noun | Las flores nacen en primavera.
+verano | summer | noun | Hace calor en verano.
+otoño | autumn/fall | noun | Las hojas caen en otoño.
+invierno | winter | noun | En invierno hace mucho frío.
+lunes | Monday | noun | Odio los lunes.
+martes | Tuesday | noun | El martes tengo clase de tenis.
+miércoles | Wednesday | noun | El miércoles es mitad de semana.
+jueves | Thursday | noun | Este jueves voy al cine.
+viernes | Friday | noun | Por fin es viernes.
+sábado | Saturday | noun | El sábado hay una fiesta.
+domingo | Sunday | noun | Los domingos descanso.
+enero | January | noun | Nací en enero.
+febrero | February | noun | Febrero es el mes más corto.
+marzo | March | noun | En marzo empieza la primavera aquí.
+abril | April | noun | Aguas mil en abril.
+mayo | May | noun | Mi madre cumple años en mayo.
+junio | June | noun | En junio terminan las clases.
+julio | July | noun | Me voy de vacaciones en julio.
+agosto | August | noun | Hace demasiado calor en agosto.
+septiembre | September | noun | En septiembre vuelvo a estudiar.
+octubre | October | noun | Halloween es en octubre.
+noviembre | November | noun | Hace frío en noviembre.
+diciembre | December | noun | Navidad es en diciembre.
+uno | one | number | Quiero un café, por favor.
+dos | two | number | Tengo dos perros.
+tres | three | number | Somos tres hermanos.
+cuatro | four | number | El coche tiene cuatro puertas.
+cinco | five | number | Faltan cinco kilómetros.
+seis | six | number | Me levanto a las seis de la mañana.
+siete | seven | number | Trabajo los siete días de la semana.
+ocho | eight | number | Duermo ocho horas diarias.
+nueve | nine | number | Mi número de la suerte es el nueve.
+diez | ten | number | Costó diez euros.
+veinte | twenty | number | Cumplo veinte años.
+treinta | thirty | number | El autobús llegó treinta minutos tarde.
+cuarenta | forty | number | Mi padre tiene cuarenta años.
+cincuenta | fifty | number | Cincuenta sombras de Grey.
+cien | hundred/one hundred | number | Pagué cien dólares.
+mil | thousand | number | Aquel vestido vale mil pesos.
+millón | million | number | Un millón de gracias.
+primero | first | adjective | Esta es mi primera vez aquí.
+segundo | second | adjective | Piso segundo, puerta B.
+tercero | third | adjective | Quedó el tercero de la carrera.
+
+# Essential Irregular & Stem-Changing Verbs
+venir | to come (irregular e->ie) | verb | Vengo de muy lejos.
+querer | to want/love (irregular e->ie) | verb | Te quiero con toda mi alma.
+hacer | to do/make (irregular) | verb | ¿Qué vas a hacer hoy?
+decir | to say/tell (irregular e->i) | verb | Siempre me dice la verdad.
+poder | to be able to/can (irregular o->ue) | verb | ¿Puedo pasar?
+poner | to put/place (irregular) | verb | Pon las llaves aquí.
+salir | to leave/go out (irregular) | verb | Salgo del trabajo a las seis.
+dar | to give (irregular) | verb | Dame tu mano.
+saber | to know (irregular) | verb | Yo no sé nada.
+conocer | to know a person/place (irregular) | verb | Conozco a tu hermana.
+pensar | to think (irregular e->ie) | verb | Pienso que es mejor así.
+empezar | to begin/start (irregular e->ie) | verb | La clase empieza ahora.
+entender | to understand (irregular e->ie) | verb | Sigo sin entender.
+sentir | to feel/regret (irregular e->ie) | verb | Lo siento muchísimo.
+dormir | to sleep (irregular o->ue) | verb | Intento dormir ocho horas.
+pedir | to ask for/request (irregular e->i) | verb | Voy a pedir dinero prestado.
+seguir | to follow/continue (irregular e->i) | verb | Sigue todo recto.
+volver | to return/go back (irregular o->ue) | verb | Vuelvo en un rato.
+encontrar | to find (irregular o->ue) | verb | No encuentro mi cartera.
+jugar | to play (irregular u->ue) | verb | Vamos a jugar un rato.
+mostrar | to show (irregular o->ue) | verb | Muéstrame el camino.
+
+# Travel, Environment & Additional Nouns
+viaje | trip/journey | noun | ¡Feliz viaje!
+coche / carro/ auto | car | noun | Vamos en coche.
+tren | train | noun | El tren de alta velocidad.
+avión | airplane | noun | Nunca he viajado en avión.
+aeropuerto | airport | noun | Llegamos al aeropuerto temprano.
+boleto / billete | ticket | noun | Un billete de ida, por favor.
+equipaje | luggage | noun | Hemos perdido mi equipaje.
+hotel | hotel | noun | Un hotel de cinco estrellas.
+habitación | room | noun | Una habitación doble.
+reserva | reservation | noun | Tengo una reserva a mi nombre.
+mapa | map | noun | Mira el mapa en tu celular.
+calle | street | noun | Cruza la calle con cuidado.
+ciudad | city | noun | Es una ciudad muy ruidosa.
+pueblo | town/village | noun | Viven en un pueblo pequeño.
+campo | country/field | noun | Fin de semana en el campo.
+lugar | place | noun | Este es mi lugar favorito.
+país | country | noun | Visité tres países en Europa.
+mundo | world | noun | Quiero dar la vuelta al mundo.
+sol | sun | noun | Hoy hace mucho sol.
+luna | moon | noun | Hay luna llena esta noche.
+estrella | star | noun | Cuenta las estrellas.
+cielo | sky | noun | El cielo está muy azul.
+lluvia | rain | noun | La lluvia cae suavemente.
+nieve | snow | noun | Me encanta jugar en la nieve.
+viento | wind | noun | Hace un viento helado.
+árbol | tree | noun | El pájaro está en el árbol.
+flor | flower | noun | Le compré unas flores hermosas.
+río | river | noun | Nos bañamos en el río.
+lago | lake | noun | Tienen una casa en el lago.
+mar | sea | noun | Nadar en el mar.
+playa | beach | noun | Día soleado en la playa.
+montaña | mountain | noun | Subimos a la montaña.
+fuego | fire | noun | ¡Cuidado con el fuego!
+tierra | earth/land/dirt | noun | Tenemos los pies en la tierra.
+animal | animal | noun | Me gustan mucho los animales.
+perro | dog | noun | Saca a pasear al perro.
+gato | cat | noun | El gato duerme en el sofá.
+pájaro | bird | noun | El pájaro canta por la mañana.
+pez | fish (alive) | noun | En el acuario hay muchos peces.
+
+# Colors & Basic Qualities
+color | color | noun | ¿Cuál es tu color favorito?
+rojo | red | adjective | Tiene un vestido rojo.
+azul | blue | adjective | El cielo está más azul hoy.
+verde | green | adjective | La hierba es verde.
+amarillo | yellow | adjective | Un taxi amarillo brillante.
+negro | black | adjective | Un gato negro cruzó la calle.
+blanco | white | adjective | Nubes blancas en el cielo.
+gris | gray | adjective | Hoy es un día gris y triste.
+marrón | brown | adjective | Sus ojos son muy marrones.
+naranja | orange | adjective | Una camisa naranja neón.
+rosa | pink | adjective | Su cuarto está pintado de rosa.
+blanco/claro | clear/light (color) | adjective | Un azul muy claro.
+oscuro | dark (color) | adjective | Me gusta el azul oscuro.
+brillante | shiny/bright | adjective | Una estrella muy brillante.
+opaco | opaque/dull | adjective | Un cristal opaco.
+ruidoso | noisy/loud | adjective | Es un bar demasiado ruidoso.
+silencioso | quiet/silent | adjective | La biblioteca es muy silenciosa.
+suave | soft | adjective | Una manta muy suave.
+áspero | rough | adjective | Tiene las manos ásperas.
+dulce | sweet | adjective | Este postre es muy dulce.
+salado | salty | adjective | La sopa está muy salada.
+amargo | bitter | adjective | El café negro es muy amargo.
+picante | spicy | adjective | La salsa mexicana es picante.
+ácido | sour | adjective | El limón es muy ácido.
+
+# Final Extra Essential Words
+sistema | system | noun | El sistema está roto.
+problema | problem | noun | No hay ningún problema.
+programa | program | noun | Cuál es tu programa favorito.
+punto | point | noun | Llegaste al punto principal.
+estado | state/condition | noun | El estado de la economía.
+forma | shape/form/way | noun | Una forma diferente de ver las cosas.
+parte | part/portion | noun | Te toca esta parte.
+lugar | place | noun | Pon cada cosa en su lugar.
+caso | case | noun | En cualquier caso, no importa.
+vez | time/instance | noun | Había una vez...
+idea | idea | noun | ¡Qué buena idea!
+verdad | truth | noun | Dime la pura verdad.
+realidad | reality | noun | En realidad no sé.
+cambio | change | noun | El mundo necesita un cambio.
+razón | reason/right | noun | Tienes toda la razón del mundo.
+cuenta | account/bill | noun | La cuenta, por favor.
+modo | way/manner | noun | De este modo es más fácil.
+nivel | level | noun | Estás a un nivel avanzado.
+Fín | end | phrase | El fín justifica los medios.
+EOF
+claro | clear | adjective | Está muy claro.
+directo | direct | adjective | Un vuelo directo.
+seguro | sure | adjective | Estoy muy seguro.
+posible | possible | adjective | Sí, es posible.
+diferente | different | adjective | Es algo diferente.
+fuerte | strong | adjective | Un café fuerte.
