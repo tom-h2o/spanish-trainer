@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { type Word, vocabDatabase } from "@/data/vocab";
+import type { Word, UserWord } from "@/hooks/useGameState";
 
 interface GameCardProps {
-    card: Word | null;
+    card: UserWord | null;
     isReviewing: boolean;
     lastResult: "success" | "error" | null;
+    globalVocab: Word[];
 }
 
 function getTypeColor(type?: string) {
@@ -21,7 +22,7 @@ function getTypeColor(type?: string) {
     return 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400';
 }
 
-function HighlightedSentence({ text }: { text: string }) {
+function HighlightedSentence({ text, globalVocab }: { text: string; globalVocab: Word[] }) {
     // split by keeping punctuation intact but separated to parse individual words
     const wordsAndPunctuation = text.split(/([.,!¿?¡:;"'()\s]+)/);
 
@@ -34,7 +35,7 @@ function HighlightedSentence({ text }: { text: string }) {
 
                 // Check if it's a known vocab word (case-insensitive)
                 const lowerSegment = segment.toLowerCase();
-                const knownWord = vocabDatabase.find(w => w.es.toLowerCase() === lowerSegment);
+                const knownWord = globalVocab.find(w => w.es.toLowerCase() === lowerSegment);
 
                 if (knownWord) {
                     return (
@@ -54,10 +55,10 @@ function HighlightedSentence({ text }: { text: string }) {
     );
 }
 
-export function GameCard({ card, isReviewing, lastResult }: GameCardProps) {
+export function GameCard({ card, isReviewing, lastResult, globalVocab }: GameCardProps) {
     // Keep a local copy of the card data so we can delay updating the back
     // during the flip animation.
-    const [displayCard, setDisplayCard] = useState<Word | null>(card);
+    const [displayCard, setDisplayCard] = useState<UserWord | null>(card);
     const [displayResult, setDisplayResult] = useState(lastResult);
 
     useEffect(() => {
@@ -140,7 +141,7 @@ export function GameCard({ card, isReviewing, lastResult }: GameCardProps) {
                         </h2>
                         <div className="space-y-2 w-full">
                             <div className="w-16 h-1 bg-black/10 mx-auto rounded-full mb-4" />
-                            <HighlightedSentence text={displayCard.ex} />
+                            <HighlightedSentence text={displayCard.ex} globalVocab={globalVocab} />
                         </div>
                     </CardContent>
                 </Card>

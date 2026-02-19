@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
-import { vocabDatabase, type Word } from '../data/vocab';
 import { supabase } from '../lib/supabase';
 import { calculateSM2, getQuality } from '../lib/sm2';
 import type { Session } from '@supabase/supabase-js';
 
+export interface Word {
+    id: number;
+    p: number;
+    es: string;
+    en: string;
+    ex: string;
+    type?: string;
+}
+
 export interface GameState {
-    currentCard: Word | null;
+    currentCard: UserWord | null;
     isReviewing: boolean;
     lastResult: 'success' | 'error' | null;
     feedbackMsg: string;
@@ -50,28 +58,29 @@ export function useGameState(session: Session) {
 
     // --- Initialization from Supabase ---
     useEffect(() => {
-        const fetchProgress = async () => {
+        const fetchData = async () => {
             if (!session?.user?.id) return;
 
             setState(prev => ({ ...prev, isLoading: true }));
 
-            const { data: dbProgress, error } = await supabase
-                .from('user_progress')
-                .select('*')
-                .eq('user_id', session.user.id);
+            // Concurrently fetch the global dictionary and user progress
+            const [wordsResponse, progressResponse] = await Promise.all([
+                supabase.from('words').select('*').order('id', { ascending: true }),
+                supabase.from('user_progress').select('*').eq('user_id', session.user.id)
+            ]);
 
-            if (error) {
-                console.error("Error fetching progress:", error);
-            }
+            if (wordsResponse.error) console.error("Error fetching words:", wordsResponse.error);
+            if (progressResponse.error) console.error("Error fetching progress:", progressResponse.error);
 
+            const dbWords = wordsResponse.data || [];
             const progressMap = new Map();
-            if (dbProgress) {
-                dbProgress.forEach(row => {
+            if (progressResponse.data) {
+                progressResponse.data.forEach(row => {
                     progressMap.set(row.word_id, row);
                 });
             }
 
-            const mergedList: UserWord[] = vocabDatabase.map(dbWord => {
+            const mergedList: UserWord[] = dbWords.map((dbWord: Word) => {
                 const savedWord = progressMap.get(dbWord.id);
                 if (savedWord) {
                     return {
@@ -98,7 +107,7 @@ export function useGameState(session: Session) {
             setState(prev => ({ ...prev, isLoading: false }));
         };
 
-        fetchProgress();
+        fetchData();
     }, [session]);
 
     // Update Stats & Pick New Card when list or filters change
@@ -298,15 +307,23 @@ export function useGameState(session: Session) {
         });
     };
 
+    // Placeholder for updateFilter, assuming it will be defined elsewhere or is a typo for setFilters
+    const updateFilter = (newFilters: typeof filters) => {
+        setFilters(newFilters);
+    };
+
     return {
+        vocabList,
         state,
         filters,
+        updateFilter,
         checkAnswer,
         handleGiveUp,
         handleSkip,
         nextCard,
         toggleLevelFilter,
-        togglePartFilter
+        togglePartFilter,
+        isLoading: state.isLoading
     };
 }
 

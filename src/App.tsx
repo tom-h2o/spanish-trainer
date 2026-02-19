@@ -12,12 +12,13 @@ import { Button } from "./components/ui/button";
 
 function Game({ session }: { session: Session }) {
   const {
+    vocabList,
     state,
     filters,
     checkAnswer,
+    nextCard,
     handleGiveUp,
     handleSkip,
-    nextCard,
     toggleLevelFilter,
     togglePartFilter
   } = useGameState(session);
@@ -50,21 +51,28 @@ function Game({ session }: { session: Session }) {
       />
 
       <main className="w-full flex flex-col items-center gap-8 min-h-[500px]">
-        <GameCard
-          card={state.currentCard}
-          isReviewing={state.isReviewing}
-          lastResult={state.lastResult}
-        />
+        {/* MAIN GAME AREA */}
+        <div className="w-full flex justify-center">
+          <GameCard
+            card={state.currentCard}
+            isReviewing={state.isReviewing}
+            lastResult={state.lastResult}
+            globalVocab={vocabList}
+          />
+        </div>
 
-        <GameInput
-          onCheck={checkAnswer}
-          onGiveUp={handleGiveUp}
-          onNext={nextCard}
-          onSkip={handleSkip}
-          isReviewing={state.isReviewing}
-          feedbackMsg={state.feedbackMsg}
-          feedbackType={state.feedbackType}
-        />
+        {/* CONTROLS */}
+        <div className="w-full max-w-[500px]">
+          <GameInput
+            isReviewing={state.isReviewing}
+            onCheck={checkAnswer}
+            onNext={nextCard}
+            onGiveUp={handleGiveUp}
+            onSkip={handleSkip}
+            feedbackMsg={state.feedbackMsg}
+            feedbackType={state.feedbackType}
+          />
+        </div>
       </main>
     </div>
   );
@@ -102,9 +110,9 @@ function App() {
 
   if (!session) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f4f7f6] dark:bg-slate-950 p-4">
+      <div className="min-h-screen bg-[#f4f7f6] dark:bg-slate-950 flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-white dark:bg-slate-900 p-8 rounded-xl shadow-lg border">
-          <h1 className="text-3xl font-bold text-center mb-6">🇪🇸 Sign In to Play</h1>
+          <h1 className="text-2xl font-bold text-center mb-6 text-slate-800 dark:text-slate-100">Sign In to Play</h1>
           <Auth
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
