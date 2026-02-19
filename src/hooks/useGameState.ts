@@ -1,13 +1,14 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { vocabDatabase, type Word } from '../data/vocab';
-
-const STORAGE_KEY = 'spanish_vocab_progress_v3';
+import { supabase } from '../lib/supabase';
+import { calculateSM2, getQuality } from '../lib/sm2';
+import type { Session } from '@supabase/supabase-js';
 
 export interface GameState {
     currentCard: Word | null;
     isReviewing: boolean;
-    lastResult: 'success' | 'error' | null; // For animation coloring
-    feedbackMsg: string; // Detail message
+    lastResult: 'success' | 'error' | null;
+    feedbackMsg: string;
     feedbackType: 'success' | 'warning' | 'error' | 'neutral';
     stats: {
         lvl0: number;
@@ -15,13 +16,23 @@ export interface GameState {
         lvl2: number;
         lvl3: number;
     };
+    isLoading: boolean;
 }
 
 export type LevelFilter = 0 | 1 | 2 | 3;
 export type PartFilter = 1 | 2;
 
-export function useGameState() {
-    const [vocabList, setVocabList] = useState<Word[]>([]);
+// Extended word interface to hold DB progress during local state
+export interface UserWord extends Word {
+    repetition: number;
+    interval: number;
+    easiness_factor: number;
+    next_review_date: string;
+    lvl: number; // mapped level 0-3 just for filters
+}
+
+export function useGameState(session: Session) {
+    const [vocabList, setVocabList] = useState<UserWord[]>([]);
     const [filters, setFilters] = useState({
         levels: [0, 1, 2, 3] as LevelFilter[],
         parts: [1, 2] as PartFilter[],
@@ -34,48 +45,74 @@ export function useGameState() {
         feedbackMsg: '',
         feedbackType: 'neutral',
         stats: { lvl0: 0, lvl1: 0, lvl2: 0, lvl3: 0 },
+        isLoading: true,
     });
 
-    // --- Initialization ---
+    // --- Initialization from Supabase ---
     useEffect(() => {
-        // Load Saved Data
-        let savedData: { id: number; lvl: number }[] = [];
-        try {
-            const savedStr = localStorage.getItem(STORAGE_KEY);
-            if (savedStr) savedData = JSON.parse(savedStr);
-        } catch (e) {
-            console.error("Save error", e);
-        }
+        const fetchProgress = async () => {
+            if (!session?.user?.id) return;
 
-        // Merge Data
-        const mergedList = vocabDatabase.map(dbWord => {
-            const savedWord = savedData.find(w => w.id === dbWord.id);
-            return { ...dbWord, lvl: savedWord ? savedWord.lvl : 0 };
-        });
+            setState(prev => ({ ...prev, isLoading: true }));
 
-        setVocabList(mergedList);
-    }, []);
+            const { data: dbProgress, error } = await supabase
+                .from('user_progress')
+                .select('*')
+                .eq('user_id', session.user.id);
 
-    // --- Save & Stats Update ---
-    const saveProgress = useCallback((updatedList: Word[]) => {
-        const toSave = updatedList.map(w => ({ id: w.id, lvl: w.lvl }));
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-        setVocabList(updatedList);
-    }, []);
+            if (error) {
+                console.error("Error fetching progress:", error);
+            }
+
+            const progressMap = new Map();
+            if (dbProgress) {
+                dbProgress.forEach(row => {
+                    progressMap.set(row.word_id, row);
+                });
+            }
+
+            const mergedList: UserWord[] = vocabDatabase.map(dbWord => {
+                const savedWord = progressMap.get(dbWord.id);
+                if (savedWord) {
+                    return {
+                        ...dbWord,
+                        repetition: savedWord.repetition,
+                        interval: savedWord.interval,
+                        easiness_factor: savedWord.easiness_factor,
+                        next_review_date: savedWord.next_review_date,
+                        lvl: savedWord.level,
+                    };
+                } else {
+                    return {
+                        ...dbWord,
+                        repetition: 0,
+                        interval: 0,
+                        easiness_factor: 2.5,
+                        next_review_date: new Date().toISOString(),
+                        lvl: 0,
+                    };
+                }
+            });
+
+            setVocabList(mergedList);
+            setState(prev => ({ ...prev, isLoading: false }));
+        };
+
+        fetchProgress();
+    }, [session]);
 
     // Update Stats & Pick New Card when list or filters change
     useEffect(() => {
-        if (vocabList.length === 0) return;
+        if (vocabList.length === 0 || state.isLoading) return;
 
-        // Calculate Stats
+        // Calculate Stats based on filter parts
         const counts = { lvl0: 0, lvl1: 0, lvl2: 0, lvl3: 0 };
         const relevantWords = vocabList.filter(w => filters.parts.includes(w.p as PartFilter));
 
         relevantWords.forEach(w => {
-            const lvl = w.lvl || 0;
-            if (lvl === 0) counts.lvl0++;
-            else if (lvl === 1) counts.lvl1++;
-            else if (lvl === 2) counts.lvl2++;
+            if (w.lvl === 0) counts.lvl0++;
+            else if (w.lvl === 1) counts.lvl1++;
+            else if (w.lvl === 2) counts.lvl2++;
             else counts.lvl3++;
         });
 
@@ -85,26 +122,33 @@ export function useGameState() {
         if (!state.currentCard && !state.isReviewing) {
             pickNewCard(vocabList, filters);
         }
-    }, [vocabList, filters.parts, filters.levels]); // Dependency on filters to re-pick if needed
+    }, [vocabList, filters.parts, filters.levels, state.isLoading]);
 
-    const pickNewCard = (list: Word[], currentFilters: typeof filters) => {
-        const deck = list.filter(w =>
-            currentFilters.levels.includes((w.lvl || 0) as LevelFilter) &&
-            currentFilters.parts.includes(w.p as PartFilter)
-        );
+    const pickNewCard = (list: UserWord[], currentFilters: typeof filters) => {
+        const now = new Date();
+        const deck = list.filter(w => {
+            const matchesFilters = currentFilters.levels.includes((w.lvl || 0) as LevelFilter) && currentFilters.parts.includes(w.p as PartFilter);
+            const isDue = new Date(w.next_review_date) <= now;
+            return matchesFilters && isDue;
+        });
 
         if (deck.length === 0) {
             setState(prev => ({
                 ...prev,
                 currentCard: null,
-                feedbackMsg: 'No cards match filters!',
+                feedbackMsg: 'No due cards match current filters! Check back tomorrow or change filters.',
                 feedbackType: 'neutral',
                 isReviewing: false
             }));
             return;
         }
 
-        const idx = Math.floor(Math.random() * deck.length);
+        // Sort by next_review_date to prioritize oldest due
+        deck.sort((a, b) => new Date(a.next_review_date).getTime() - new Date(b.next_review_date).getTime());
+        // Pick from top 5 oldest to add some randomness
+        const poolSize = Math.min(5, deck.length);
+        const idx = Math.floor(Math.random() * poolSize);
+
         setState(prev => ({
             ...prev,
             currentCard: deck[idx],
@@ -115,7 +159,73 @@ export function useGameState() {
         }));
     };
 
+    // --- Database Sync ---
+    const syncProgressToDB = async (wordToUpdate: UserWord) => {
+        if (!session?.user?.id) return;
+
+        const { error } = await supabase
+            .from('user_progress')
+            .upsert({
+                user_id: session.user.id,
+                word_id: wordToUpdate.id,
+                repetition: wordToUpdate.repetition,
+                interval: wordToUpdate.interval,
+                easiness_factor: wordToUpdate.easiness_factor,
+                next_review_date: wordToUpdate.next_review_date,
+                level: wordToUpdate.lvl
+            }, {
+                onConflict: 'user_id,word_id'
+            });
+
+        if (error) {
+            console.error("Failed to sync progress:", error);
+        }
+    };
+
     // --- Actions ---
+    const handleCheckAction = async (isCorrect: boolean, isFuzzy: boolean, isSkip: boolean, message: string, type: GameState['feedbackType'], resultType: GameState['lastResult']) => {
+        if (!state.currentCard || state.isReviewing) return;
+
+        const updatedList = [...vocabList];
+        const cardIdx = updatedList.findIndex(w => w.id === state.currentCard!.id);
+        const currentWord = updatedList[cardIdx];
+
+        const quality = getQuality(isCorrect, isFuzzy, isSkip);
+        const sm2Data = calculateSM2(
+            quality,
+            currentWord.repetition,
+            currentWord.interval,
+            currentWord.easiness_factor
+        );
+
+        // Map SM-2 interval to simple 0-3 levels for UI grouping
+        let uiLvl = 0;
+        if (sm2Data.interval > 0) uiLvl = 1;
+        if (sm2Data.interval > 6) uiLvl = 2;
+        if (sm2Data.interval > 21) uiLvl = 3;
+
+        const updatedWord: UserWord = {
+            ...currentWord,
+            repetition: sm2Data.repetition,
+            interval: sm2Data.interval,
+            easiness_factor: sm2Data.easiness_factor,
+            next_review_date: sm2Data.next_review_date,
+            lvl: uiLvl
+        };
+
+        updatedList[cardIdx] = updatedWord;
+
+        setState(prev => ({
+            ...prev,
+            isReviewing: true,
+            feedbackMsg: message,
+            feedbackType: type,
+            lastResult: resultType
+        }));
+
+        setVocabList(updatedList);
+        await syncProgressToDB(updatedWord);
+    };
 
     const checkAnswer = (input: string) => {
         if (!state.currentCard || state.isReviewing) return;
@@ -145,62 +255,25 @@ export function useGameState() {
             }
         }
 
-        // Update List
-        const updatedList = [...vocabList];
-        const cardIdx = updatedList.findIndex(w => w.id === state.currentCard!.id);
-        const word = updatedList[cardIdx];
-
-        let newState = { ...state, isReviewing: true };
-
         if (isCorrect) {
             if (isFuzzy) {
-                newState.feedbackMsg = `Close enough! Correct: "${correctTerm}"`;
-                newState.feedbackType = 'warning';
+                handleCheckAction(true, true, false, `Close enough! Correct: "${correctTerm}"`, 'warning', 'success');
             } else {
-                newState.feedbackMsg = 'Correct!';
-                newState.feedbackType = 'success';
+                handleCheckAction(true, false, false, 'Correct!', 'success', 'success');
             }
-            newState.lastResult = 'success';
-            if ((word.lvl || 0) < 3) word.lvl = (word.lvl || 0) + 1;
         } else {
-            newState.feedbackMsg = `Incorrect. Solution: "${correctTerm}"`;
-            newState.feedbackType = 'error';
-            newState.lastResult = 'error';
-            word.lvl = 0; // Reset
+            handleCheckAction(false, false, false, `Incorrect. Solution: "${correctTerm}"`, 'error', 'error');
         }
-
-        setState(newState);
-        saveProgress(updatedList);
     };
 
     const handleGiveUp = () => {
         if (!state.currentCard || state.isReviewing) return;
-
-        const updatedList = [...vocabList];
-        const cardIdx = updatedList.findIndex(w => w.id === state.currentCard!.id);
-        const word = updatedList[cardIdx];
-        word.lvl = 0;
-
-        setState(prev => ({
-            ...prev,
-            isReviewing: true,
-            lastResult: 'error',
-            feedbackMsg: `Keep practicing! Solution: "${state.currentCard!.en}"`,
-            feedbackType: 'warning'
-        }));
-        saveProgress(updatedList);
+        handleCheckAction(false, false, false, `Keep practicing! Solution: "${state.currentCard.en}"`, 'warning', 'error');
     };
 
     const handleSkip = () => {
         if (!state.currentCard || state.isReviewing) return;
-
-        setState(prev => ({
-            ...prev,
-            isReviewing: true,
-            lastResult: null,
-            feedbackMsg: `Skipped. Solution: "${state.currentCard!.en}"`,
-            feedbackType: 'neutral'
-        }));
+        handleCheckAction(false, false, true, `Skipped. Solution: "${state.currentCard.en}"`, 'neutral', null);
     };
 
     const nextCard = () => {
@@ -212,13 +285,6 @@ export function useGameState() {
             const newLevels = prev.levels.includes(lvl)
                 ? prev.levels.filter(l => l !== lvl)
                 : [...prev.levels, lvl];
-            // Force pick new card if current one becomes invalid? 
-            // Effect will handle it if we reset currentCard or if we depend on filters there.
-            // For now, let's just update filters, and effect will trigger.
-            // But if we are reviewing, we might want to stay on card.
-            // Simplest: just update filters. Effect handles stats. 
-            // If current card is invalid, maybe we should skip it? 
-            // Let's rely on user clicking "Next" to get valid card or effect if deck is empty.
             return { ...prev, levels: newLevels };
         });
     };
