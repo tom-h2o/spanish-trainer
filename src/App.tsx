@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import type { Session } from "@supabase/supabase-js";
-import { supabase } from "./lib/supabase";
+import { supabase, isSupabaseConfigured } from "./lib/supabase";
 
 import { useGameState } from "./hooks/useGameState";
 import { GameCard } from "./components/GameCard";
@@ -72,6 +72,19 @@ function Game({ session }: { session: Session }) {
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
+
+  if (!isSupabaseConfigured) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#f4f7f6] dark:bg-slate-950 p-4 text-center">
+        <div className="w-full max-w-md bg-white dark:bg-slate-900 p-8 rounded-xl shadow-lg border">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">Configuration Error</h1>
+          <p className="text-slate-600 dark:text-slate-300">
+            Supabase environment variables are missing! Please add <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong> to your Vercel project environment variables, then redeploy.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
