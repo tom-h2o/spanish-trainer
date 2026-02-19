@@ -96,10 +96,11 @@ export function GameCard({ card, isReviewing, lastResult }: GameCardProps) {
                 {/* BACK */}
                 <Card
                     className={cn(
-                        "absolute w-full h-full backface-hidden flex flex-col items-center justify-center shadow-lg p-6",
+                        "absolute w-full h-full backface-hidden flex flex-col items-center justify-center shadow-lg p-6 transition-opacity duration-300 delay-150",
                         lastResult === "success"
                             ? "bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800"
-                            : "bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800"
+                            : "bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800",
+                        !isReviewing ? "opacity-0" : "opacity-100"
                     )}
                     style={{ transform: "rotateY(180deg)" }}
                 >
