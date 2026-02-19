@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -54,7 +55,32 @@ function HighlightedSentence({ text }: { text: string }) {
 }
 
 export function GameCard({ card, isReviewing, lastResult }: GameCardProps) {
-    if (!card) {
+    // Keep a local copy of the card data so we can delay updating the back
+    // during the flip animation.
+    const [displayCard, setDisplayCard] = useState<Word | null>(card);
+    const [displayResult, setDisplayResult] = useState(lastResult);
+
+    useEffect(() => {
+        if (isReviewing) {
+            // If we are reviewing (flipped to back), immediately show the NEW result data
+            setDisplayCard(card);
+            setDisplayResult(lastResult);
+        } else {
+            // If we are resetting (flipping back to front for a new card),
+            // ONLY update the front data immediately. Delay updating the back data
+            // until the 500ms flip animation is completely finished.
+            setDisplayCard(prev => prev ? { ...prev, es: card?.es || '', p: card?.p || 0, lvl: card?.lvl || 0, type: card?.type } : card);
+
+            const timeout = setTimeout(() => {
+                setDisplayCard(card);
+                setDisplayResult(null);
+            }, 500); // 500ms matches the framer-motion transition duration
+
+            return () => clearTimeout(timeout);
+        }
+    }, [card, isReviewing, lastResult]);
+
+    if (!displayCard) {
         return (
             <Card className="w-full max-w-[500px] h-[300px] flex items-center justify-center bg-muted/20 border-dashed">
                 <div className="text-center text-muted-foreground p-6">
@@ -77,17 +103,17 @@ export function GameCard({ card, isReviewing, lastResult }: GameCardProps) {
                 <Card className="absolute w-full h-full backface-hidden flex flex-col items-center justify-center border-t-4 border-t-primary shadow-lg p-6">
                     <div className="absolute top-4 left-4 flex gap-2">
                         <div className="text-xs font-mono text-muted-foreground bg-muted px-2 py-1 rounded">
-                            Part {card.p} • Level {card.lvl}
+                            Part {displayCard.p} • Level {displayCard.lvl}
                         </div>
-                        {card.type && (
-                            <div className={cn("text-xs font-bold uppercase tracking-wider px-2 py-1 rounded", getTypeColor(card.type))}>
-                                {card.type}
+                        {displayCard.type && (
+                            <div className={cn("text-xs font-bold uppercase tracking-wider px-2 py-1 rounded", getTypeColor(displayCard.type))}>
+                                {displayCard.type}
                             </div>
                         )}
                     </div>
                     <CardContent className="text-center space-y-4">
                         <h2 className="text-5xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">
-                            {card.es}
+                            {displayCard.es}
                         </h2>
                         <p className="text-muted-foreground italic">Translate to English</p>
                     </CardContent>
@@ -96,11 +122,12 @@ export function GameCard({ card, isReviewing, lastResult }: GameCardProps) {
                 {/* BACK */}
                 <Card
                     className={cn(
-                        "absolute w-full h-full backface-hidden flex flex-col items-center justify-center shadow-lg p-6 transition-opacity duration-300 delay-150",
-                        lastResult === "success"
+                        "absolute w-full h-full backface-hidden flex flex-col items-center justify-center shadow-lg p-6 transition-colors duration-300",
+                        displayResult === "success"
                             ? "bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800"
-                            : "bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800",
-                        !isReviewing ? "opacity-0" : "opacity-100"
+                            : displayResult === "error"
+                                ? "bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800"
+                                : "bg-white dark:bg-slate-900"
                     )}
                     style={{ transform: "rotateY(180deg)" }}
                 >
@@ -109,11 +136,11 @@ export function GameCard({ card, isReviewing, lastResult }: GameCardProps) {
                     </div>
                     <CardContent className="text-center space-y-6">
                         <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-50">
-                            {card.en.toUpperCase()}
+                            {displayCard.en.toUpperCase()}
                         </h2>
                         <div className="space-y-2 w-full">
                             <div className="w-16 h-1 bg-black/10 mx-auto rounded-full mb-4" />
-                            <HighlightedSentence text={card.ex} />
+                            <HighlightedSentence text={displayCard.ex} />
                         </div>
                     </CardContent>
                 </Card>
