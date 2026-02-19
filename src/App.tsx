@@ -9,6 +9,7 @@ function App() {
     filters,
     checkAnswer,
     handleGiveUp,
+    handleSkip,
     nextCard,
     toggleLevelFilter,
     togglePartFilter
@@ -46,7 +47,7 @@ function App() {
             onCheck={checkAnswer}
             onGiveUp={handleGiveUp}
             onNext={nextCard}
-            onSkip={nextCard} /* Skip = Next loosely */
+            onSkip={handleSkip} /* Skip shows the correct answer but doesn't lower the level */
             isReviewing={state.isReviewing}
             feedbackMsg={state.feedbackMsg}
             feedbackType={state.feedbackType}

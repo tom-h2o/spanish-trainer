@@ -163,7 +163,7 @@ export function useGameState() {
             newState.lastResult = 'success';
             if ((word.lvl || 0) < 3) word.lvl = (word.lvl || 0) + 1;
         } else {
-            newState.feedbackMsg = 'Incorrect';
+            newState.feedbackMsg = `Incorrect. Solution: "${correctTerm}"`;
             newState.feedbackType = 'error';
             newState.lastResult = 'error';
             word.lvl = 0; // Reset
@@ -185,10 +185,22 @@ export function useGameState() {
             ...prev,
             isReviewing: true,
             lastResult: 'error',
-            feedbackMsg: 'Keep practicing!',
+            feedbackMsg: `Keep practicing! Solution: "${state.currentCard!.en}"`,
             feedbackType: 'warning'
         }));
         saveProgress(updatedList);
+    };
+
+    const handleSkip = () => {
+        if (!state.currentCard || state.isReviewing) return;
+
+        setState(prev => ({
+            ...prev,
+            isReviewing: true,
+            lastResult: null,
+            feedbackMsg: `Skipped. Solution: "${state.currentCard!.en}"`,
+            feedbackType: 'neutral'
+        }));
     };
 
     const nextCard = () => {
@@ -225,6 +237,7 @@ export function useGameState() {
         filters,
         checkAnswer,
         handleGiveUp,
+        handleSkip,
         nextCard,
         toggleLevelFilter,
         togglePartFilter
