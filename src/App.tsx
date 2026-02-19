@@ -10,7 +10,12 @@ import { GameControls } from "./components/GameControls";
 import { GameInput } from "./components/GameInput";
 import { Button } from "./components/ui/button";
 
+import { ProgressDashboard } from "./components/ProgressDashboard";
+import { PlayCircle, BarChart2 } from "lucide-react";
+
 function Game({ session }: { session: Session }) {
+  const [activeView, setActiveView] = useState<'play' | 'dashboard'>('play');
+
   const {
     vocabList,
     state,
@@ -52,41 +57,69 @@ function Game({ session }: { session: Session }) {
           🇪🇸 Spanish Flashcards
         </h1>
         <p className="text-muted-foreground">Master your daily vocabulary with spaced repetition.</p>
+
+        {/* VIEW TOGGLE TABS */}
+        <div className="flex justify-center gap-2 mt-6">
+          <Button
+            variant={activeView === 'play' ? 'default' : 'outline'}
+            onClick={() => setActiveView('play')}
+            className="rounded-full px-6"
+          >
+            <PlayCircle className="w-4 h-4 mr-2" />
+            Practice
+          </Button>
+          <Button
+            variant={activeView === 'dashboard' ? 'default' : 'outline'}
+            onClick={() => setActiveView('dashboard')}
+            className="rounded-full px-6"
+          >
+            <BarChart2 className="w-4 h-4 mr-2" />
+            Progress
+          </Button>
+        </div>
       </header>
 
-      <GameControls
-        filters={filters}
-        onToggleLevel={toggleLevelFilter}
-        onTogglePart={togglePartFilter}
-        isReverseMode={state.isReverseMode}
-        onToggleReverseMode={toggleReverseMode}
-        stats={state.stats}
-      />
-
-      <main className="w-full flex flex-col items-center gap-8 min-h-[500px]">
-        {/* MAIN GAME AREA */}
-        <div className="w-full flex justify-center">
-          <GameCard
-            card={state.currentCard}
-            isReviewing={state.isReviewing}
-            lastResult={state.lastResult}
-            globalVocab={vocabList}
+      {activeView === 'play' ? (
+        <>
+          <GameControls
+            filters={filters}
+            onToggleLevel={toggleLevelFilter}
+            onTogglePart={togglePartFilter}
+            isReverseMode={state.isReverseMode}
+            onToggleReverseMode={toggleReverseMode}
+            stats={state.stats}
           />
-        </div>
 
-        {/* CONTROLS */}
-        <div className="w-full max-w-[500px]">
-          <GameInput
-            isReviewing={state.isReviewing}
-            onCheck={checkAnswer}
-            onNext={nextCard}
-            onGiveUp={handleGiveUp}
-            onSkip={handleSkip}
-            feedbackMsg={state.feedbackMsg}
-            feedbackType={state.feedbackType}
-          />
-        </div>
-      </main>
+          <main className="w-full flex flex-col items-center gap-8 min-h-[500px]">
+            {/* MAIN GAME AREA */}
+            <div className="w-full flex justify-center">
+              <GameCard
+                card={state.currentCard}
+                isReviewing={state.isReviewing}
+                lastResult={state.lastResult}
+                globalVocab={vocabList}
+              />
+            </div>
+
+            {/* CONTROLS */}
+            <div className="w-full max-w-[500px]">
+              <GameInput
+                isReviewing={state.isReviewing}
+                onCheck={checkAnswer}
+                onNext={nextCard}
+                onGiveUp={handleGiveUp}
+                onSkip={handleSkip}
+                feedbackMsg={state.feedbackMsg}
+                feedbackType={state.feedbackType}
+              />
+            </div>
+          </main>
+        </>
+      ) : (
+        <main className="w-full flex justify-center min-h-[500px]">
+          <ProgressDashboard vocabList={vocabList} />
+        </main>
+      )}
     </div>
   );
 }
