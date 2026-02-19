@@ -9,6 +9,7 @@ interface GameCardProps {
     isReviewing: boolean;
     lastResult: "success" | "error" | null;
     globalVocab: Word[];
+    isReverseMode: boolean;
 }
 
 function getTypeColor(type?: string) {
@@ -55,7 +56,7 @@ function HighlightedSentence({ text, globalVocab }: { text: string; globalVocab:
     );
 }
 
-export function GameCard({ card, isReviewing, lastResult, globalVocab }: GameCardProps) {
+export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverseMode }: GameCardProps) {
     // Keep a local copy of the card data so we can delay updating the back
     // during the flip animation.
     const [displayCard, setDisplayCard] = useState<UserWord | null>(card);
@@ -70,7 +71,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab }: GameCar
             // If we are resetting (flipping back to front for a new card),
             // ONLY update the front data immediately. Delay updating the back data
             // until the 500ms flip animation is completely finished.
-            setDisplayCard(prev => prev ? { ...prev, es: card?.es || '', p: card?.p || 0, lvl: card?.lvl || 0, type: card?.type } : card);
+            setDisplayCard(prev => prev ? { ...prev, en: card?.en || '', es: card?.es || '', p: card?.p || 0, lvl: card?.lvl || 0, type: card?.type, ex: card?.ex || '' } : card);
 
             const timeout = setTimeout(() => {
                 setDisplayCard(card);
@@ -81,7 +82,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab }: GameCar
         }
     }, [card, isReviewing, lastResult]);
 
-    if (!displayCard) {
+    if (!card) {
         return (
             <Card className="w-full max-w-[500px] h-[300px] flex items-center justify-center bg-muted/20 border-dashed">
                 <div className="text-center text-muted-foreground p-6">
@@ -92,6 +93,13 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab }: GameCar
         );
     }
 
+    // Always use displayCard for the UI (except for the empty state check above, which needs 'card' so it disappears immediately)
+    const activeCard = displayCard || card;
+
+    const frontTerm = isReverseMode ? activeCard.en : activeCard.es;
+    const backTerm = isReverseMode ? activeCard.es : activeCard.en;
+    const frontInstruction = isReverseMode ? "Translate to Spanish" : "Translate to English";
+
     return (
         <div className="perspective-1000 w-full max-w-[500px] h-[300px] relative">
             <motion.div
@@ -101,22 +109,22 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab }: GameCar
                 style={{ transformStyle: "preserve-3d" }}
             >
                 {/* FRONT */}
-                <Card className="absolute w-full h-full backface-hidden flex flex-col items-center justify-center border-t-4 border-t-primary shadow-lg p-6">
+                <Card className="absolute w-full h-full backface-hidden flex flex-col items-center justify-center border-t-4 border-t-primary shadow-lg p-6 bg-white dark:bg-slate-900">
                     <div className="absolute top-4 left-4 flex gap-2">
                         <div className="text-xs font-mono text-muted-foreground bg-muted px-2 py-1 rounded">
-                            Part {displayCard.p} • Level {displayCard.lvl}
+                            Part {activeCard.p} • Level {activeCard.lvl}
                         </div>
-                        {displayCard.type && (
-                            <div className={cn("text-xs font-bold uppercase tracking-wider px-2 py-1 rounded", getTypeColor(displayCard.type))}>
-                                {displayCard.type}
+                        {activeCard.type && (
+                            <div className={cn("text-xs font-bold uppercase tracking-wider px-2 py-1 rounded", getTypeColor(activeCard.type))}>
+                                {activeCard.type}
                             </div>
                         )}
                     </div>
                     <CardContent className="text-center space-y-4">
                         <h2 className="text-5xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">
-                            {displayCard.es}
+                            {frontTerm}
                         </h2>
-                        <p className="text-muted-foreground italic">Translate to English</p>
+                        <p className="text-muted-foreground italic">{frontInstruction}</p>
                     </CardContent>
                 </Card>
 
@@ -137,11 +145,11 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab }: GameCar
                     </div>
                     <CardContent className="text-center space-y-6">
                         <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-50">
-                            {displayCard.en.toUpperCase()}
+                            {backTerm.toUpperCase()}
                         </h2>
                         <div className="space-y-2 w-full">
                             <div className="w-16 h-1 bg-black/10 mx-auto rounded-full mb-4" />
-                            <HighlightedSentence text={displayCard.ex} globalVocab={globalVocab} />
+                            <HighlightedSentence text={activeCard.ex} globalVocab={globalVocab} />
                         </div>
                     </CardContent>
                 </Card>

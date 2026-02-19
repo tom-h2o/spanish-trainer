@@ -98,6 +98,7 @@ function Game({ session }: { session: Session }) {
                 isReviewing={state.isReviewing}
                 lastResult={state.lastResult}
                 globalVocab={vocabList}
+                isReverseMode={state.isReverseMode}
               />
             </div>
 
