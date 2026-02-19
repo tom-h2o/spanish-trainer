@@ -24,21 +24,29 @@ export function GameInput({ onCheck, onGiveUp, onSkip, onNext, isReviewing, feed
         } else {
             // Focus "Next" button logic could be handled by auto-focusing the button, 
             // but typically user might want to appreciate the card first.
-            // We'll add a keyboard listener for Enter in the parent or here.
-            // For now, let's keep focus on input but disable it? 
-            // Or focus the next button.
             const nextBtn = document.getElementById("btn-next");
             if (nextBtn) nextBtn.focus();
         }
     }, [isReviewing]);
 
+    // Global listener for Enter during review mode
+    useEffect(() => {
+        const handleGlobalKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Enter" && isReviewing) {
+                e.preventDefault();
+                onNext();
+            }
+        };
+
+        if (isReviewing) {
+            window.addEventListener("keydown", handleGlobalKeyDown);
+            return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+        }
+    }, [isReviewing, onNext]);
+
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
-            if (isReviewing) {
-                onNext();
-            } else {
-                handleCheck();
-            }
+            handleCheck();
         }
     };
 
