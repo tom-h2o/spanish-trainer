@@ -15,6 +15,7 @@ export interface Word {
 export interface GameState {
     currentCard: UserWord | null;
     isReviewing: boolean;
+    isReverseMode: boolean;
     lastResult: 'success' | 'error' | null;
     feedbackMsg: string;
     feedbackType: 'success' | 'warning' | 'error' | 'neutral';
@@ -46,15 +47,21 @@ export function useGameState(session: Session) {
         parts: [1, 2] as PartFilter[],
     });
 
+    // --- State & Actions ---
     const [state, setState] = useState<GameState>({
         currentCard: null,
         isReviewing: false,
+        isReverseMode: false,
         lastResult: null,
         feedbackMsg: '',
         feedbackType: 'neutral',
         stats: { lvl0: 0, lvl1: 0, lvl2: 0, lvl3: 0 },
         isLoading: true,
     });
+
+    const toggleReverseMode = () => {
+        setState(prev => ({ ...prev, isReverseMode: !prev.isReverseMode }));
+    };
 
     // --- Initialization from Supabase ---
     useEffect(() => {
@@ -231,7 +238,6 @@ export function useGameState(session: Session) {
             feedbackType: type,
             lastResult: resultType
         }));
-
         setVocabList(updatedList);
         await syncProgressToDB(updatedWord);
     };
@@ -240,10 +246,16 @@ export function useGameState(session: Session) {
         if (!state.currentCard || state.isReviewing) return;
 
         const guess = normalize(input);
-        const correctAnswers = state.currentCard.en.split('/');
+
+        // Determine correct terms based on game mode
+        const correctAnswers = state.isReverseMode
+            ? state.currentCard.es.split('/')
+            : state.currentCard.en.split('/');
+
+        const displayTerm = state.isReverseMode ? state.currentCard.es : state.currentCard.en;
+
         let isCorrect = false;
         let isFuzzy = false;
-        let correctTerm = state.currentCard.en;
 
         for (let ans of correctAnswers) {
             const normalizedAns = normalize(ans);
@@ -266,23 +278,25 @@ export function useGameState(session: Session) {
 
         if (isCorrect) {
             if (isFuzzy) {
-                handleCheckAction(true, true, false, `Close enough! Correct: "${correctTerm}"`, 'warning', 'success');
+                handleCheckAction(true, true, false, `Close enough! Correct: "${displayTerm}"`, 'warning', 'success');
             } else {
                 handleCheckAction(true, false, false, 'Correct!', 'success', 'success');
             }
         } else {
-            handleCheckAction(false, false, false, `Incorrect. Solution: "${correctTerm}"`, 'error', 'error');
+            handleCheckAction(false, false, false, `Incorrect. Solution: "${displayTerm}"`, 'error', 'error');
         }
     };
 
     const handleGiveUp = () => {
         if (!state.currentCard || state.isReviewing) return;
-        handleCheckAction(false, false, false, `Keep practicing! Solution: "${state.currentCard.en}"`, 'warning', 'error');
+        const displayTerm = state.isReverseMode ? state.currentCard.es : state.currentCard.en;
+        handleCheckAction(false, false, false, `Keep practicing! Solution: "${displayTerm}"`, 'warning', 'error');
     };
 
     const handleSkip = () => {
         if (!state.currentCard || state.isReviewing) return;
-        handleCheckAction(false, false, true, `Skipped. Solution: "${state.currentCard.en}"`, 'neutral', null);
+        const displayTerm = state.isReverseMode ? state.currentCard.es : state.currentCard.en;
+        handleCheckAction(false, false, true, `Skipped. Solution: "${displayTerm}"`, 'neutral', null);
     };
 
     const nextCard = () => {
@@ -307,29 +321,25 @@ export function useGameState(session: Session) {
         });
     };
 
-    // Placeholder for updateFilter, assuming it will be defined elsewhere or is a typo for setFilters
-    const updateFilter = (newFilters: typeof filters) => {
-        setFilters(newFilters);
-    };
-
     return {
         vocabList,
         state,
         filters,
-        updateFilter,
         checkAnswer,
         handleGiveUp,
         handleSkip,
         nextCard,
         toggleLevelFilter,
         togglePartFilter,
+        toggleReverseMode,
         isLoading: state.isLoading
     };
 }
 
 // --- Utils ---
+
 function normalize(str: string) {
-    return str.toLowerCase().trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+    return str.toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[.,\/#!$%\^&\*;:{}=\-_`~()¡¿?]/g, "");
 }
 
 function levenshtein(a: string, b: string) {

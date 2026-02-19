@@ -20,11 +20,22 @@ function Game({ session }: { session: Session }) {
     handleGiveUp,
     handleSkip,
     toggleLevelFilter,
-    togglePartFilter
+    togglePartFilter,
+    toggleReverseMode
   } = useGameState(session);
 
+  if (state.isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[50vh] space-y-4">
+        <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
+        <p className="text-slate-500 font-medium animate-pulse">Syncing flashcards...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full max-w-4xl flex flex-col items-center gap-8">
+    <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-8">
+      {/* HEADER */}
       <header className="text-center space-y-2 mb-4 relative w-full">
         <Button
           variant="outline"
@@ -47,6 +58,8 @@ function Game({ session }: { session: Session }) {
         filters={filters}
         onToggleLevel={toggleLevelFilter}
         onTogglePart={togglePartFilter}
+        isReverseMode={state.isReverseMode}
+        onToggleReverseMode={toggleReverseMode}
         stats={state.stats}
       />
 
