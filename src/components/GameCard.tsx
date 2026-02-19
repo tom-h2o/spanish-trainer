@@ -25,7 +25,8 @@ export function GameCard({ card, isReviewing, lastResult }: GameCardProps) {
         <div className="perspective-1000 w-full max-w-[500px] h-[300px] relative">
             <motion.div
                 className="w-full h-full relative preserve-3d transition-transform duration-500"
-                animate={{ rotateX: isReviewing ? 180 : 0 }}
+                animate={{ rotateY: isReviewing ? 180 : 0 }}
+                initial={{ rotateY: 0 }}
                 style={{ transformStyle: "preserve-3d" }}
             >
                 {/* FRONT */}
@@ -44,12 +45,12 @@ export function GameCard({ card, isReviewing, lastResult }: GameCardProps) {
                 {/* BACK */}
                 <Card
                     className={cn(
-                        "absolute w-full h-full backface-hidden flex flex-col items-center justify-center shadow-lg p-6 rotate-x-180",
+                        "absolute w-full h-full backface-hidden flex flex-col items-center justify-center shadow-lg p-6",
                         lastResult === "success"
                             ? "bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800"
                             : "bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800"
                     )}
-                    style={{ transform: "rotateX(180deg)" }}
+                    style={{ transform: "rotateY(180deg)" }}
                 >
                     <div className="absolute top-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                         Translation
