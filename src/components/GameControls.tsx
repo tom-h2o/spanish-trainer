@@ -21,6 +21,19 @@ interface GameControlsProps {
     };
 }
 
+const DECK_NAMES: Record<number, string> = {
+    1: "Top 100 Words",
+    2: "Regular Verbs",
+    3: "Irregular Verbs",
+    4: "Core Adjectives",
+    5: "Time & Numbers",
+    6: "People & Home",
+    7: "Food & Travel",
+    8: "Health & Body",
+    9: "Connectors",
+    10: "Business & Study"
+};
+
 export function GameControls({ filters, onToggleLevel, onTogglePart, stats, isReverseMode = false, onToggleReverseMode }: GameControlsProps) {
     return (
         <div className="w-full max-w-[600px] bg-white/50 dark:bg-slate-900/50 backdrop-blur-md p-6 rounded-xl border shadow-sm space-y-6">
@@ -38,7 +51,7 @@ export function GameControls({ filters, onToggleLevel, onTogglePart, stats, isRe
                                 onCheckedChange={() => onTogglePart(p as PartFilter)}
                             />
                             <Label htmlFor={`part-${p}`} className="cursor-pointer text-sm font-medium">
-                                Part {p}
+                                {DECK_NAMES[p]}
                             </Label>
                         </div>
                     ))}
