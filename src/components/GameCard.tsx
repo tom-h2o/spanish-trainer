@@ -110,9 +110,10 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
     return (
         <div className="perspective-1000 w-full max-w-[500px] h-[300px] relative">
             <motion.div
-                className="w-full h-full relative preserve-3d transition-transform duration-500"
+                className="w-full h-full relative preserve-3d"
                 animate={{ rotateY: isReviewing ? 180 : 0 }}
                 initial={{ rotateY: 0 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
                 style={{ transformStyle: "preserve-3d" }}
             >
                 {/* FRONT */}
