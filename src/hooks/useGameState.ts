@@ -29,7 +29,7 @@ export interface GameState {
 }
 
 export type LevelFilter = 0 | 1 | 2 | 3;
-export type PartFilter = 1 | 2;
+export type PartFilter = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 // Extended word interface to hold DB progress during local state
 export interface UserWord extends Word {
@@ -44,7 +44,7 @@ export function useGameState(session: Session) {
     const [vocabList, setVocabList] = useState<UserWord[]>([]);
     const [filters, setFilters] = useState({
         levels: [0, 1, 2, 3] as LevelFilter[],
-        parts: [1, 2] as PartFilter[],
+        parts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as PartFilter[],
     });
 
     // --- State & Actions ---

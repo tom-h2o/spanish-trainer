@@ -28,9 +28,9 @@ export function GameControls({ filters, onToggleLevel, onTogglePart, stats, isRe
             {/* TOP ROW: Parts and Mode */}
             <div className="flex flex-col sm:flex-row justify-between items-center gap-6 border-b pb-6 border-slate-200 dark:border-slate-800">
                 {/* PARTS */}
-                <div className="flex flex-1 items-center gap-3">
+                <div className="flex flex-1 flex-wrap items-center gap-3">
                     <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Decks:</span>
-                    {[1, 2].map((p) => (
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p) => (
                         <div key={p} className="flex items-center space-x-2 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-colors">
                             <Checkbox
                                 id={`part-${p}`}
