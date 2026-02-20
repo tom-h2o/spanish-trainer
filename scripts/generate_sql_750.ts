@@ -79,7 +79,9 @@ function buildSqlString() {
   }
 
   let sql = "-- Drop the existing table and recreate it to ensure a clean slate\n" +
-    "DROP TABLE IF EXISTS public.words;\n\n" +
+    "DROP TABLE IF EXISTS public.words CASCADE;\n\n" +
+    "-- Clear existing progress data since the word IDs will be completely remapped\n" +
+    "TRUNCATE TABLE public.user_progress;\n\n" +
     "CREATE TABLE public.words (\n" +
     "    id SERIAL PRIMARY KEY,\n" +
     "    en TEXT NOT NULL,\n" +
@@ -95,11 +97,6 @@ function buildSqlString() {
     "CREATE POLICY \"Enable read access for all authenticated users\"\n" +
     "ON public.words FOR SELECT\n" +
     "TO authenticated USING (true);\n\n" +
-    "-- Explicitly drop the previous foreign key and recreate it to ensure it references the correct table\n" +
-    "ALTER TABLE IF EXISTS public.user_progress\n" +
-    "DROP CONSTRAINT IF EXISTS user_progress_word_id_fkey,\n" +
-    "ADD CONSTRAINT user_progress_word_id_fkey \n" +
-    "FOREIGN KEY (word_id) REFERENCES public.words(id) ON DELETE CASCADE;\n\n" +
     "INSERT INTO public.words (en, es, type, ex, p, lvl) VALUES\n";
 
   const values = parsedWords.map(w => {
@@ -112,7 +109,13 @@ function buildSqlString() {
     return "  ('" + safeEn + "', '" + safeEs + "', '" + safeType + "', '" + safeEx + "', " + w.p + ", 0)";
   });
 
-  sql += values.join(',\n') + ';\n';
+  sql += values.join(',\n') + ';\n\n';
+
+  sql += "-- Explicitly drop the previous foreign key and recreate it to ensure it references the correct table\n" +
+    "ALTER TABLE IF EXISTS public.user_progress\n" +
+    "DROP CONSTRAINT IF EXISTS user_progress_word_id_fkey,\n" +
+    "ADD CONSTRAINT user_progress_word_id_fkey \n" +
+    "FOREIGN KEY (word_id) REFERENCES public.words(id) ON DELETE CASCADE;\n";
 
   fs.writeFileSync(sqlFilePath, sql, 'utf-8');
   console.log("✅ Database script generated at " + sqlFilePath + " with " + parsedWords.length + " highly-curated core fluency words.");

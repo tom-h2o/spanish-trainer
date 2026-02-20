@@ -1,5 +1,8 @@
 -- Drop the existing table and recreate it to ensure a clean slate
-DROP TABLE IF EXISTS public.words;
+DROP TABLE IF EXISTS public.words CASCADE;
+
+-- Clear existing progress data since the word IDs will be completely remapped
+TRUNCATE TABLE public.user_progress;
 
 CREATE TABLE public.words (
     id SERIAL PRIMARY KEY,
@@ -18,12 +21,6 @@ ALTER TABLE public.words ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Enable read access for all authenticated users"
 ON public.words FOR SELECT
 TO authenticated USING (true);
-
--- Explicitly drop the previous foreign key and recreate it to ensure it references the correct table
-ALTER TABLE IF EXISTS public.user_progress
-DROP CONSTRAINT IF EXISTS user_progress_word_id_fkey,
-ADD CONSTRAINT user_progress_word_id_fkey 
-FOREIGN KEY (word_id) REFERENCES public.words(id) ON DELETE CASCADE;
 
 INSERT INTO public.words (en, es, type, ex, p, lvl) VALUES
   ('el/la', 'the', 'article', 'El perro y la gata juegan.', 1, 0),
@@ -776,3 +773,9 @@ INSERT INTO public.words (en, es, type, ex, p, lvl) VALUES
   ('posible', 'possible', 'adjective', 'Sí, es posible.', 10, 0),
   ('diferente', 'different', 'adjective', 'Es algo diferente.', 10, 0),
   ('fuerte', 'strong', 'adjective', 'Un café fuerte.', 10, 0);
+
+-- Explicitly drop the previous foreign key and recreate it to ensure it references the correct table
+ALTER TABLE IF EXISTS public.user_progress
+DROP CONSTRAINT IF EXISTS user_progress_word_id_fkey,
+ADD CONSTRAINT user_progress_word_id_fkey 
+FOREIGN KEY (word_id) REFERENCES public.words(id) ON DELETE CASCADE;
