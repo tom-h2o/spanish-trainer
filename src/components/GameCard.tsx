@@ -59,22 +59,28 @@ function HighlightedSentence({ text, globalVocab }: { text: string; globalVocab:
 export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverseMode }: GameCardProps) {
     // Keep a local copy of the card data so we can delay updating the back
     // during the flip animation.
-    const [displayCard, setDisplayCard] = useState<UserWord | null>(card);
+    // Keep track of the *previous* card that was shown, so we can keep its details
+    // on the back face of the card while the flip-back animation is playing.
+    const [displayCardFront, setDisplayCardFront] = useState<UserWord | null>(card);
+    const [displayCardBack, setDisplayCardBack] = useState<UserWord | null>(card);
     const [displayResult, setDisplayResult] = useState(lastResult);
 
     useEffect(() => {
         if (isReviewing) {
-            // If we are reviewing (flipped to back), immediately show the NEW result data
-            setDisplayCard(card);
+            // Flipping to BACK (Reviewing)
+            // The front is already the current card. We update the back to show the answer for the current card.
+            setDisplayCardBack(card);
             setDisplayResult(lastResult);
         } else {
-            // If we are resetting (flipping back to front for a new card),
-            // ONLY update the front data immediately. Delay updating the back data
-            // until the 500ms flip animation is completely finished.
-            setDisplayCard(prev => prev ? { ...prev, en: card?.en || '', es: card?.es || '', p: card?.p || 0, lvl: card?.lvl || 0, type: card?.type, ex: card?.ex || '' } : card);
+            // Flipping to FRONT (Next Card)
+            // Immediately update the FRONT to show the new card so the user can see it right away once the flip is done.
+            setDisplayCardFront(card);
 
+            // DELAY updating the BACK of the card.
+            // If we update the back immediately, the answer for the new card will be visible
+            // on the back face while the card is rotating back to 0 degrees.
             const timeout = setTimeout(() => {
-                setDisplayCard(card);
+                setDisplayCardBack(card);
                 setDisplayResult(null);
             }, 500); // 500ms matches the framer-motion transition duration
 
@@ -93,11 +99,12 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
         );
     }
 
-    // Always use displayCard for the UI (except for the empty state check above, which needs 'card' so it disappears immediately)
-    const activeCard = displayCard || card;
+    // Always use our display state for the UI (except for the empty state check above, which needs 'card' so it disappears immediately)
+    const activeFrontCard = displayCardFront || card;
+    const activeBackCard = displayCardBack || card;
 
-    const frontTerm = isReverseMode ? activeCard.en : activeCard.es;
-    const backTerm = isReverseMode ? activeCard.es : activeCard.en;
+    const frontTerm = isReverseMode ? activeFrontCard.en : activeFrontCard.es;
+    const backTerm = isReverseMode ? activeBackCard.es : activeBackCard.en;
     const frontInstruction = isReverseMode ? "Translate to Spanish" : "Translate to English";
 
     return (
@@ -112,11 +119,11 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                 <Card className="absolute w-full h-full backface-hidden flex flex-col items-center justify-center border-t-4 border-t-primary shadow-lg p-6 bg-white dark:bg-slate-900">
                     <div className="absolute top-4 left-4 flex gap-2">
                         <div className="text-xs font-mono text-muted-foreground bg-muted px-2 py-1 rounded">
-                            Part {activeCard.p} • Level {activeCard.lvl}
+                            Part {activeFrontCard.p} • Level {activeFrontCard.lvl}
                         </div>
-                        {activeCard.type && (
-                            <div className={cn("text-xs font-bold uppercase tracking-wider px-2 py-1 rounded", getTypeColor(activeCard.type))}>
-                                {activeCard.type}
+                        {activeFrontCard.type && (
+                            <div className={cn("text-xs font-bold uppercase tracking-wider px-2 py-1 rounded", getTypeColor(activeFrontCard.type))}>
+                                {activeFrontCard.type}
                             </div>
                         )}
                     </div>
@@ -149,7 +156,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                         </h2>
                         <div className="space-y-2 w-full">
                             <div className="w-16 h-1 bg-black/10 mx-auto rounded-full mb-4" />
-                            <HighlightedSentence text={activeCard.ex} globalVocab={globalVocab} />
+                            <HighlightedSentence text={activeBackCard.ex} globalVocab={globalVocab} />
                         </div>
                     </CardContent>
                 </Card>
