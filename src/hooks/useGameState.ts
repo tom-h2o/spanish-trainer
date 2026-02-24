@@ -35,6 +35,7 @@ export interface GameState {
         lvl3: number;
     };
     isLoading: boolean;
+    cardHistory: UserWord[];
 }
 
 export type LevelFilter = 0 | 1 | 2 | 3;
@@ -66,6 +67,7 @@ export function useGameState(session: Session) {
         feedbackType: 'neutral',
         stats: { lvl0: 0, lvl1: 0, lvl2: 0, lvl3: 0 },
         isLoading: true,
+        cardHistory: [],
     });
 
     const toggleReverseMode = () => {
@@ -176,14 +178,40 @@ export function useGameState(session: Session) {
         const poolSize = Math.min(5, deck.length);
         const idx = Math.floor(Math.random() * poolSize);
 
-        setState(prev => ({
-            ...prev,
-            currentCard: deck[idx],
-            isReviewing: false,
-            lastResult: null,
-            feedbackMsg: '',
-            feedbackType: 'neutral'
-        }));
+        setState(prev => {
+            const history = prev.currentCard ? [...prev.cardHistory, prev.currentCard] : prev.cardHistory;
+            // Keep history reasonably sized (e.g. last 50 cards)
+            if (history.length > 50) history.shift();
+
+            return {
+                ...prev,
+                currentCard: deck[idx],
+                isReviewing: false,
+                lastResult: null,
+                feedbackMsg: '',
+                feedbackType: 'neutral',
+                cardHistory: history
+            };
+        });
+    };
+
+    const goBack = () => {
+        setState(prev => {
+            if (prev.cardHistory.length === 0) return prev;
+
+            const newHistory = [...prev.cardHistory];
+            const previousCard = newHistory.pop()!;
+
+            return {
+                ...prev,
+                currentCard: previousCard,
+                cardHistory: newHistory,
+                isReviewing: false,
+                lastResult: null,
+                feedbackMsg: 'Went back to previous card.',
+                feedbackType: 'neutral'
+            };
+        });
     };
 
     // --- Database Sync ---
@@ -343,7 +371,9 @@ export function useGameState(session: Session) {
         toggleLevelFilter,
         togglePartFilter,
         toggleReverseMode,
-        isLoading: state.isLoading
+        isLoading: state.isLoading,
+        goBack,
+        canGoBack: state.cardHistory.length > 0
     };
 }
 

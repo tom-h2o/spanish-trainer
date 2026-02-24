@@ -26,7 +26,9 @@ function Game({ session }: { session: Session }) {
     handleSkip,
     toggleLevelFilter,
     togglePartFilter,
-    toggleReverseMode
+    toggleReverseMode,
+    goBack,
+    canGoBack
   } = useGameState(session);
 
   if (state.isLoading) {
@@ -113,6 +115,8 @@ function Game({ session }: { session: Session }) {
                 onNext={nextCard}
                 onGiveUp={handleGiveUp}
                 onSkip={handleSkip}
+                onGoBack={goBack}
+                canGoBack={canGoBack}
                 feedbackMsg={state.feedbackMsg}
                 feedbackType={state.feedbackType}
               />

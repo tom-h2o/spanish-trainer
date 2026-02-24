@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, HelpCircle, ArrowRight } from "lucide-react";
+import { Send, HelpCircle, ArrowRight, Undo2 } from "lucide-react";
 
 interface GameInputProps {
     onCheck: (val: string) => void;
@@ -11,9 +11,11 @@ interface GameInputProps {
     isReviewing: boolean;
     feedbackMsg: string;
     feedbackType: 'success' | 'warning' | 'error' | 'neutral';
+    onGoBack: () => void;
+    canGoBack: boolean;
 }
 
-export function GameInput({ onCheck, onGiveUp, onSkip, onNext, isReviewing, feedbackMsg, feedbackType }: GameInputProps) {
+export function GameInput({ onCheck, onGiveUp, onSkip, onNext, isReviewing, feedbackMsg, feedbackType, onGoBack, canGoBack }: GameInputProps) {
     const [val, setVal] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -99,11 +101,19 @@ export function GameInput({ onCheck, onGiveUp, onSkip, onNext, isReviewing, feed
                 )}
             </div>
 
-            {!isReviewing && (
-                <Button onClick={onSkip} variant="ghost" className="text-muted-foreground hover:text-foreground">
-                    Skip this card
-                </Button>
-            )}
+            <div className="w-full flex justify-between px-2">
+                {canGoBack ? (
+                    <Button onClick={onGoBack} variant="ghost" className="text-muted-foreground hover:text-foreground">
+                        <Undo2 className="w-4 h-4 mr-2" /> Go Back
+                    </Button>
+                ) : <div />}
+
+                {!isReviewing && (
+                    <Button onClick={onSkip} variant="ghost" className="text-muted-foreground hover:text-foreground">
+                        Skip this card
+                    </Button>
+                )}
+            </div>
         </div>
     );
 }
