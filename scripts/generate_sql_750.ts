@@ -144,7 +144,7 @@ function buildSqlString() {
 
       let conjugations = "null";
       if (type.includes("verb") || type === "verb") {
-        conjugations = getConjugationJSON(es);
+        conjugations = getConjugationJSON(en); // 'en' variable holds the Spanish word because parts[0] is Spanish
       }
 
       parsedWords.push({ en, es, type, ex, p: deckPart, conjugations });
