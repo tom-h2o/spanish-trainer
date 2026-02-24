@@ -101,11 +101,13 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
     const [displayCardFront, setDisplayCardFront] = useState<UserWord | null>(card);
     const [displayCardBack, setDisplayCardBack] = useState<UserWord | null>(card);
     const [displayResult, setDisplayResult] = useState(lastResult);
+    const [showConjugations, setShowConjugations] = useState(false);
 
     // For swipe drag physics
     const [exitX, setExitX] = useState(0);
 
     useEffect(() => {
+        setShowConjugations(false); // Reset overlay on state change
         if (isReviewing) {
             // Flipping to BACK (Reviewing)
             // The front is already the current card. We update the back to show the answer for the current card.
@@ -198,6 +200,19 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                             {frontTerm}
                         </h2>
                         <p className="text-muted-foreground italic">{frontInstruction}</p>
+
+                        {!isReverseMode && activeFrontCard.conjugations && (
+                            <div className="pointer-events-auto mt-4">
+                                <button
+                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowConjugations(true); }}
+                                    onPointerDownCapture={(e) => e.stopPropagation()}
+                                    className="text-sm font-bold text-primary hover:text-primary/80 hover:underline px-4 py-2"
+                                >
+                                    View Conjugations
+                                </button>
+                            </div>
+                        )}
+
                         <p className="text-xs text-muted-foreground opacity-50 block md:hidden mt-8">Swipe to reveal answer</p>
                     </CardContent>
                 </Card>
@@ -224,13 +239,41 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                         <div className="space-y-2 w-full">
                             <div className="w-16 h-1 bg-black/10 mx-auto rounded-full mb-4" />
                             <HighlightedSentence text={activeBackCard.ex} globalVocab={globalVocab} />
-                            {activeBackCard.conjugations && !isReverseMode && (
-                                <ConjugationTable conjugations={activeBackCard.conjugations} />
+
+                            {isReverseMode && activeBackCard.conjugations && (
+                                <div className="pointer-events-auto mt-4">
+                                    <button
+                                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowConjugations(true); }}
+                                        onPointerDownCapture={(e) => e.stopPropagation()}
+                                        className="text-sm font-bold text-primary hover:text-primary/80 hover:underline px-4 py-2"
+                                    >
+                                        View Conjugations
+                                    </button>
+                                </div>
                             )}
                         </div>
                         <p className="text-xs text-muted-foreground opacity-50 block md:hidden absolute bottom-4 left-0 right-0 text-center">Swipe for next card</p>
                     </CardContent>
                 </Card>
+
+                {/* CONJUGATION OVERLAY */}
+                {showConjugations && (
+                    <div
+                        className="absolute inset-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm rounded-xl p-6 flex flex-col justify-center items-center pointer-events-auto border-2 border-primary/20 shadow-xl"
+                        onPointerDownCapture={(e) => e.stopPropagation()}
+                        style={{ transform: isReviewing ? "rotateY(180deg)" : "rotateY(0deg)", backfaceVisibility: "hidden" }}
+                    >
+                        <button
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowConjugations(false); }}
+                            className="absolute top-4 right-4 text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 p-2 font-bold text-xl"
+                        >
+                            ✕
+                        </button>
+                        <div className="w-full">
+                            <ConjugationTable conjugations={!isReverseMode ? activeFrontCard.conjugations : activeBackCard.conjugations} />
+                        </div>
+                    </div>
+                )}
             </motion.div>
         </div>
     );
