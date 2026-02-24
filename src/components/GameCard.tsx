@@ -25,6 +25,36 @@ function getTypeColor(type?: string) {
     return 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400';
 }
 
+function matchesVocabWord(word: Word, segment: string): boolean {
+    const s = segment.toLowerCase();
+
+    // Check combined words like "un/una", "el/la"
+    const bases = word.es.toLowerCase().split('/').map(w => w.trim());
+
+    for (const base of bases) {
+        if (base === s) return true;
+
+        // Simple plural and gender rules for nouns, adjectives, determiners, etc.
+        if (word.type && !word.type.includes('verb')) {
+            if (base + 's' === s) return true;
+            if (base + 'es' === s) return true;
+            if (base.endsWith('z') && base.slice(0, -1) + 'ces' === s) return true;
+
+            if (base.endsWith('o')) {
+                const stem = base.slice(0, -1);
+                if (stem + 'a' === s || stem + 'os' === s || stem + 'as' === s) return true;
+            }
+        }
+    }
+
+    // Check conjugations for verbs
+    if (word.type?.includes('verb') && word.conjugations) {
+        if (Object.values(word.conjugations).includes(s)) return true;
+    }
+
+    return false;
+}
+
 function HighlightedSentence({ text, globalVocab }: { text: string; globalVocab: Word[] }) {
     // split by keeping punctuation intact but separated to parse individual words
     const wordsAndPunctuation = text.split(/([.,!¿?¡:;"'()\s]+)/);
@@ -36,9 +66,8 @@ function HighlightedSentence({ text, globalVocab }: { text: string; globalVocab:
                     return <span key={i}>{segment}</span>;
                 }
 
-                // Check if it's a known vocab word (case-insensitive)
-                const lowerSegment = segment.toLowerCase();
-                const knownWord = globalVocab.find(w => w.es.toLowerCase() === lowerSegment);
+                // Check if it's a known vocab word
+                const knownWord = globalVocab.find(w => matchesVocabWord(w, segment));
 
                 if (knownWord) {
                     return (
@@ -139,7 +168,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
 
     if (!card) {
         return (
-            <Card className="w-full max-w-[500px] h-[300px] flex items-center justify-center bg-muted/20 border-dashed">
+            <Card className="w-full max-w-[500px] h-[220px] sm:h-[300px] flex items-center justify-center bg-muted/20 border-dashed">
                 <div className="text-center text-muted-foreground p-6">
                     <p className="text-xl font-bold">No cards found</p>
                     <p className="text-sm">Adjust your filters to continue.</p>
@@ -173,7 +202,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
     const frontInstruction = isReverseMode ? "Translate to Spanish" : "Translate to English";
 
     return (
-        <div className="perspective-1000 w-full max-w-[500px] h-[300px] relative">
+        <div className="perspective-1000 w-full max-w-[500px] h-[220px] sm:h-[300px] relative">
             <motion.div
                 className="w-full h-full relative preserve-3d cursor-grab active:cursor-grabbing"
                 animate={{

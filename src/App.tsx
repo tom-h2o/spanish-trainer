@@ -39,7 +39,7 @@ function Game({ session }: { session: Session }) {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-8">
+    <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-4 md:gap-8 flex-1">
       {/* HEADER */}
       <header className="text-center space-y-2 pt-4 mb-4 relative w-full">
         <Button
@@ -60,7 +60,7 @@ function Game({ session }: { session: Session }) {
         <p className="text-sm md:text-base text-muted-foreground px-4">Master your daily vocabulary with spaced repetition.</p>
 
         {/* VIEW TOGGLE TABS */}
-        <div className="flex justify-center gap-2 mt-6">
+        <div className="flex justify-center gap-2 mt-2 md:mt-6">
           <Button
             variant={activeView === 'play' ? 'default' : 'outline'}
             onClick={() => setActiveView('play')}
@@ -91,7 +91,7 @@ function Game({ session }: { session: Session }) {
             stats={state.stats}
           />
 
-          <main className="w-full flex flex-col items-center gap-8 min-h-[500px]">
+          <main className="w-full flex flex-col items-center gap-4 md:gap-8 flex-1 justify-center min-h-0">
             {/* MAIN GAME AREA */}
             <div className="w-full flex justify-center">
               <GameCard
@@ -133,7 +133,7 @@ function App() {
 
   if (!isSupabaseConfigured) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f4f7f6] dark:bg-slate-950 p-4 text-center">
+      <div className="min-h-[100dvh] flex items-center justify-center bg-[#f4f7f6] dark:bg-slate-950 p-4 text-center">
         <div className="w-full max-w-md bg-white dark:bg-slate-900 p-8 rounded-xl shadow-lg border">
           <h1 className="text-2xl font-bold text-red-600 mb-4">Configuration Error</h1>
           <p className="text-slate-600 dark:text-slate-300">
@@ -160,7 +160,7 @@ function App() {
 
   if (!session) {
     return (
-      <div className="min-h-screen bg-[#f4f7f6] dark:bg-slate-950 flex items-center justify-center p-4">
+      <div className="min-h-[100dvh] bg-[#f4f7f6] dark:bg-slate-950 flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-white dark:bg-slate-900 p-8 rounded-xl shadow-lg border">
           <h1 className="text-2xl font-bold text-center mb-6 text-slate-800 dark:text-slate-100">Sign In to Play</h1>
           <Auth
@@ -174,7 +174,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[#f4f7f6] dark:bg-slate-950 flex flex-col items-center py-4 md:py-10 px-4 font-sans text-slate-900 selection:bg-blue-100 overflow-x-hidden">
+    <div className="min-h-[100dvh] w-full bg-[#f4f7f6] dark:bg-slate-950 flex flex-col items-center py-2 md:py-10 px-4 font-sans text-slate-900 selection:bg-blue-100 overflow-x-hidden">
       <Game session={session} />
     </div>
   );
