@@ -17,6 +17,7 @@ export interface Word {
         nosotros: string;
         vosotros: string;
         ellos: string;
+        gerundio?: string;
     };
 }
 

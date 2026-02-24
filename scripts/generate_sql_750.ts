@@ -68,6 +68,29 @@ const irregularVerbs: Record<string, string[]> = {
   "medir": ["mido", "mides", "mide", "medimos", "medís", "miden"]
 };
 
+const irregularGerunds: Record<string, string> = {
+  "ir": "yendo",
+  "poder": "pudiendo",
+  "decir": "diciendo",
+  "pedir": "pidiendo",
+  "sentir": "sintiendo",
+  "dormir": "durmiendo",
+  "seguir": "siguiendo",
+  "venir": "viniendo",
+  "traer": "trayendo",
+  "caer": "cayendo",
+  "oír": "oyendo",
+  "conseguir": "consiguiendo",
+  "servir": "sirviendo",
+  "repetir": "repitiendo",
+  "reír": "riendo",
+  "medir": "midiendo",
+  "leer": "leyendo",
+  "creer": "creyendo",
+  "construir": "construyendo",
+  "huir": "huyendo"
+};
+
 function conjugateRegular(verb: string) {
   const stem = verb.slice(0, -2);
   const ending = verb.slice(-2);
@@ -75,6 +98,16 @@ function conjugateRegular(verb: string) {
   if (ending === 'er') return [stem + 'o', stem + 'es', stem + 'e', stem + 'emos', stem + 'éis', stem + 'en'];
   if (ending === 'ir') return [stem + 'o', stem + 'es', stem + 'e', stem + 'imos', stem + 'ís', stem + 'en'];
   return null;
+}
+
+function getGerundio(verb: string) {
+  if (irregularGerunds[verb]) return irregularGerunds[verb];
+
+  const stem = verb.slice(0, -2);
+  const ending = verb.slice(-2);
+  if (ending === 'ar') return stem + 'ando';
+  if (ending === 'er' || ending === 'ir') return stem + 'iendo';
+  return '';
 }
 
 function getConjugationJSON(verb: string) {
@@ -93,7 +126,8 @@ function getConjugationJSON(verb: string) {
       el: conjugations[2],
       nosotros: conjugations[3],
       vosotros: conjugations[4],
-      ellos: conjugations[5]
+      ellos: conjugations[5],
+      gerundio: getGerundio(cleanVerb)
     });
   }
   return "null";

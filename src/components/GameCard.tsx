@@ -88,6 +88,12 @@ function ConjugationTable({ conjugations }: { conjugations: Word['conjugations']
                     <span className="text-muted-foreground mr-2">ellos/ellas</span>
                     <span className="font-semibold text-slate-700 dark:text-slate-300">{conjugations.ellos}</span>
                 </div>
+                {conjugations.gerundio && (
+                    <div className="col-span-2 flex justify-between border-t border-slate-300 dark:border-slate-600 pt-2 mt-2">
+                        <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">gerundio</span>
+                        <span className="font-semibold text-primary dark:text-primary-400 italic">{conjugations.gerundio}</span>
+                    </div>
+                )}
             </div>
         </div>
     );
