@@ -201,7 +201,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                         </h2>
                         <p className="text-muted-foreground italic">{frontInstruction}</p>
 
-                        {!isReverseMode && activeFrontCard.conjugations && (
+                        {isReverseMode && activeFrontCard.conjugations && (
                             <div className="pointer-events-auto mt-4">
                                 <button
                                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowConjugations(true); }}
@@ -240,7 +240,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                             <div className="w-16 h-1 bg-black/10 mx-auto rounded-full mb-4" />
                             <HighlightedSentence text={activeBackCard.ex} globalVocab={globalVocab} />
 
-                            {isReverseMode && activeBackCard.conjugations && (
+                            {!isReverseMode && activeBackCard.conjugations && (
                                 <div className="pointer-events-auto mt-4">
                                     <button
                                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowConjugations(true); }}
