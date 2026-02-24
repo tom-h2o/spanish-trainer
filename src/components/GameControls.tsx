@@ -1,7 +1,11 @@
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { ChevronDown, ChevronUp, Settings2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import type { LevelFilter, PartFilter } from "@/hooks/useGameState";
 
 interface GameControlsProps {
@@ -35,67 +39,125 @@ const DECK_NAMES: Record<number, string> = {
 };
 
 export function GameControls({ filters, onToggleLevel, onTogglePart, stats, isReverseMode = false, onToggleReverseMode }: GameControlsProps) {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    // Auto-expand on larger screens if desired, but here we just leave it to user preference or default closed on mobile.
+    useEffect(() => {
+        const checkScreen = () => {
+            if (window.innerWidth >= 768) {
+                setIsExpanded(true);
+            } else {
+                setIsExpanded(false);
+            }
+        };
+        checkScreen();
+        window.addEventListener('resize', checkScreen);
+        return () => window.removeEventListener('resize', checkScreen);
+    }, []);
+
+    const totalActiveFilters = filters.parts.length + filters.levels.length;
+
     return (
-        <div className="w-full max-w-[600px] bg-white/50 dark:bg-slate-900/50 backdrop-blur-md p-6 rounded-xl border shadow-sm space-y-6">
-
-            {/* TOP ROW: Parts and Mode */}
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-6 border-b pb-6 border-slate-200 dark:border-slate-800">
-                {/* PARTS */}
-                <div className="flex flex-1 flex-wrap items-center gap-3">
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Decks:</span>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p) => (
-                        <div key={p} className="flex items-center space-x-2 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-colors">
-                            <Checkbox
-                                id={`part-${p}`}
-                                checked={filters.parts.includes(p as PartFilter)}
-                                onCheckedChange={() => onTogglePart(p as PartFilter)}
-                            />
-                            <Label htmlFor={`part-${p}`} className="cursor-pointer text-sm font-medium">
-                                {DECK_NAMES[p]}
-                            </Label>
-                        </div>
-                    ))}
+        <div className="w-full max-w-[600px] bg-white/50 dark:bg-slate-900/50 backdrop-blur-md rounded-xl border shadow-sm overflow-hidden transition-all duration-300">
+            {/* MOBILE TOGGLE HEADER */}
+            <div
+                className="flex items-center justify-between p-4 cursor-pointer md:cursor-default"
+                onClick={() => {
+                    if (window.innerWidth < 768) {
+                        setIsExpanded(!isExpanded);
+                    }
+                }}
+            >
+                <div className="flex items-center gap-2">
+                    <Settings2 className="w-5 h-5 text-indigo-500" />
+                    <span className="font-bold text-slate-700 dark:text-slate-300">Game Settings</span>
+                    {window.innerWidth < 768 && !isExpanded && (
+                        <Badge variant="secondary" className="ml-2 text-xs">
+                            {totalActiveFilters} Active
+                        </Badge>
+                    )}
                 </div>
 
-                {/* MODE TOGGLE */}
-                {onToggleReverseMode && (
-                    <div className="flex items-center space-x-3 bg-indigo-50 dark:bg-indigo-950/30 px-4 py-2 rounded-xl border border-indigo-100 dark:border-indigo-900/50">
-                        <Label htmlFor="reverse-mode" className="cursor-pointer text-sm font-bold text-indigo-700 dark:text-indigo-400">
-                            English Mode
-                        </Label>
-                        <Switch
-                            id="reverse-mode"
-                            checked={isReverseMode}
-                            onCheckedChange={onToggleReverseMode}
-                        />
-                        <Label htmlFor="reverse-mode" className="cursor-pointer text-sm font-bold text-slate-700 dark:text-slate-300">
-                            Reverse (ES)
-                        </Label>
-                    </div>
+                {/* Visual indicator for mobile only */}
+                <div className="md:hidden">
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={(e) => { e.stopPropagation(); setIsExpanded(!isExpanded); }}>
+                        {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                    </Button>
+                </div>
+            </div>
+
+            {/* EXPANDABLE CONTENT */}
+            <AnimatePresence initial={false}>
+                {isExpanded && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                        <div className="p-6 pt-0 space-y-6">
+                            {/* TOP ROW: Parts and Mode */}
+                            <div className="flex flex-col sm:flex-row justify-between items-center gap-6 border-b pb-6 border-slate-200 dark:border-slate-800">
+                                {/* PARTS */}
+                                <div className="flex flex-1 flex-wrap items-center gap-3">
+                                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Decks:</span>
+                                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p) => (
+                                        <div key={p} className="flex items-center space-x-2 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-colors">
+                                            <Checkbox
+                                                id={`part-${p}`}
+                                                checked={filters.parts.includes(p as PartFilter)}
+                                                onCheckedChange={() => onTogglePart(p as PartFilter)}
+                                            />
+                                            <Label htmlFor={`part-${p}`} className="cursor-pointer text-sm font-medium">
+                                                {DECK_NAMES[p]}
+                                            </Label>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* MODE TOGGLE */}
+                                {onToggleReverseMode && (
+                                    <div className="flex items-center space-x-3 bg-indigo-50 dark:bg-indigo-950/30 px-4 py-2 rounded-xl border border-indigo-100 dark:border-indigo-900/50">
+                                        <Label htmlFor="reverse-mode" className="cursor-pointer text-sm font-bold text-indigo-700 dark:text-indigo-400">
+                                            English Mode
+                                        </Label>
+                                        <Switch
+                                            id="reverse-mode"
+                                            checked={isReverseMode}
+                                            onCheckedChange={onToggleReverseMode}
+                                        />
+                                        <Label htmlFor="reverse-mode" className="cursor-pointer text-sm font-bold text-slate-700 dark:text-slate-300">
+                                            Reverse (ES)
+                                        </Label>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* BOTTOM ROW: LEVELS */}
+                            <div className="flex flex-col gap-3">
+                                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center sm:text-left">Mastery Levels Filter:</span>
+                                <div className="flex flex-wrap items-center gap-3 justify-center sm:justify-start">
+                                    {[0, 1, 2, 3].map((l) => (
+                                        <div key={l} className="flex items-center space-x-2 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-colors">
+                                            <Checkbox
+                                                id={`lvl-${l}`}
+                                                checked={filters.levels.includes(l as LevelFilter)}
+                                                onCheckedChange={() => onToggleLevel(l as LevelFilter)}
+                                            />
+                                            <Label htmlFor={`lvl-${l}`} className="cursor-pointer flex items-center gap-2 text-sm">
+                                                <span className={l === 0 ? "text-slate-500 font-medium italic" : "font-bold"}>{l === 0 ? "New Words" : `Level ${l}`}</span>
+                                                <Badge variant={l === 0 ? "outline" : "secondary"} className="text-xs h-5 px-1.5 min-w-[20px] justify-center ml-1">
+                                                    {(stats as any)[`lvl${l}`]}
+                                                </Badge>
+                                            </Label>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
                 )}
-            </div>
-
-            {/* BOTTOM ROW: LEVELS */}
-            <div className="flex flex-col gap-3">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center sm:text-left">Mastery Levels Filter:</span>
-                <div className="flex flex-wrap items-center gap-3 justify-center sm:justify-start">
-                    {[0, 1, 2, 3].map((l) => (
-                        <div key={l} className="flex items-center space-x-2 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-colors">
-                            <Checkbox
-                                id={`lvl-${l}`}
-                                checked={filters.levels.includes(l as LevelFilter)}
-                                onCheckedChange={() => onToggleLevel(l as LevelFilter)}
-                            />
-                            <Label htmlFor={`lvl-${l}`} className="cursor-pointer flex items-center gap-2 text-sm">
-                                <span className={l === 0 ? "text-slate-500 font-medium italic" : "font-bold"}>{l === 0 ? "New Words" : `Level ${l}`}</span>
-                                <Badge variant={l === 0 ? "outline" : "secondary"} className="text-xs h-5 px-1.5 min-w-[20px] justify-center ml-1">
-                                    {(stats as any)[`lvl${l}`]}
-                                </Badge>
-                            </Label>
-                        </div>
-                    ))}
-                </div>
-            </div>
+            </AnimatePresence>
         </div>
     );
 }

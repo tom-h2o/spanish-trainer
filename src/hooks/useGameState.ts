@@ -10,6 +10,14 @@ export interface Word {
     en: string;
     ex: string;
     type?: string;
+    conjugations?: {
+        yo: string;
+        tu: string;
+        el: string;
+        nosotros: string;
+        vosotros: string;
+        ellos: string;
+    };
 }
 
 export interface GameState {

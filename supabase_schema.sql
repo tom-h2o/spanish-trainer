@@ -1,5 +1,6 @@
+-- Note: The words table is created in supabase_seed_words_750.sql.
 -- Create a table to track user progress and SM-2 spaced repetition data
-create table public.user_progress (
+create table if not exists public.user_progress (
   id uuid default gen_random_uuid() primary key,
   user_id uuid references auth.users not null,
   word_id integer not null,

@@ -10,6 +10,8 @@ interface GameCardProps {
     lastResult: "success" | "error" | null;
     globalVocab: Word[];
     isReverseMode: boolean;
+    onNext?: () => void;
+    onGiveUp?: () => void;
 }
 
 function getTypeColor(type?: string) {
@@ -56,7 +58,42 @@ function HighlightedSentence({ text, globalVocab }: { text: string; globalVocab:
     );
 }
 
-export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverseMode }: GameCardProps) {
+function ConjugationTable({ conjugations }: { conjugations: Word['conjugations'] }) {
+    if (!conjugations) return null;
+    return (
+        <div className="w-full mt-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg p-3 border border-slate-100 dark:border-slate-800">
+            <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Present Tense</h4>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-left">
+                <div className="flex justify-between border-b border-slate-200 dark:border-slate-700 pb-1">
+                    <span className="text-muted-foreground mr-2">yo</span>
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">{conjugations.yo}</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-200 dark:border-slate-700 pb-1">
+                    <span className="text-muted-foreground mr-2">nosotros</span>
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">{conjugations.nosotros}</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-200 dark:border-slate-700 pb-1">
+                    <span className="text-muted-foreground mr-2">tú</span>
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">{conjugations.tu}</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-200 dark:border-slate-700 pb-1">
+                    <span className="text-muted-foreground mr-2">vosotros</span>
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">{conjugations.vosotros}</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-200 dark:border-slate-700 pb-1">
+                    <span className="text-muted-foreground mr-2">él/ella</span>
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">{conjugations.el}</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-200 dark:border-slate-700 pb-1">
+                    <span className="text-muted-foreground mr-2">ellos/ellas</span>
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">{conjugations.ellos}</span>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverseMode, onNext, onGiveUp }: GameCardProps) {
     // Keep a local copy of the card data so we can delay updating the back
     // during the flip animation.
     // Keep track of the *previous* card that was shown, so we can keep its details
@@ -64,6 +101,9 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
     const [displayCardFront, setDisplayCardFront] = useState<UserWord | null>(card);
     const [displayCardBack, setDisplayCardBack] = useState<UserWord | null>(card);
     const [displayResult, setDisplayResult] = useState(lastResult);
+
+    // For swipe drag physics
+    const [exitX, setExitX] = useState(0);
 
     useEffect(() => {
         if (isReviewing) {
@@ -75,6 +115,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
             // Flipping to FRONT (Next Card)
             // Immediately update the FRONT to show the new card so the user can see it right away once the flip is done.
             setDisplayCardFront(card);
+            setExitX(0); // reset swipe status
 
             // DELAY updating the BACK of the card.
             // If we update the back immediately, the answer for the new card will be visible
@@ -99,6 +140,22 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
         );
     }
 
+    const handleDragEnd = (_event: any, info: any) => {
+        const threshold = 100;
+        if (info.offset.x > threshold || info.offset.x < -threshold) {
+            // Swiped far enough
+            if (!isReviewing) {
+                // If on front face, swipe means "give up / reveal"
+                if (onGiveUp) onGiveUp();
+            } else {
+                // If on back face, swipe means "next card"
+                // Animate the card flying off screen
+                setExitX(info.offset.x > 0 ? 500 : -500);
+                if (onNext) setTimeout(onNext, 200); // Wait for the exit animation a bit
+            }
+        }
+    };
+
     // Always use our display state for the UI (except for the empty state check above, which needs 'card' so it disappears immediately)
     const activeFrontCard = displayCardFront || card;
     const activeBackCard = displayCardBack || card;
@@ -110,11 +167,19 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
     return (
         <div className="perspective-1000 w-full max-w-[500px] h-[300px] relative">
             <motion.div
-                className="w-full h-full relative preserve-3d"
-                animate={{ rotateY: isReviewing ? 180 : 0 }}
-                initial={{ rotateY: 0 }}
+                className="w-full h-full relative preserve-3d cursor-grab active:cursor-grabbing"
+                animate={{
+                    rotateY: isReviewing ? 180 : 0,
+                    x: exitX,
+                    opacity: exitX !== 0 ? 0 : 1
+                }}
+                initial={{ rotateY: 0, x: 0, opacity: 1 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
                 style={{ transformStyle: "preserve-3d" }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                onDragEnd={handleDragEnd}
+                whileDrag={{ scale: 1.05 }}
             >
                 {/* FRONT */}
                 <Card className="absolute w-full h-full backface-hidden flex flex-col items-center justify-center border-t-4 border-t-primary shadow-lg p-6 bg-white dark:bg-slate-900">
@@ -128,11 +193,12 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                             </div>
                         )}
                     </div>
-                    <CardContent className="text-center space-y-4">
+                    <CardContent className="text-center space-y-4 pointer-events-none">
                         <h2 className="text-5xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">
                             {frontTerm}
                         </h2>
                         <p className="text-muted-foreground italic">{frontInstruction}</p>
+                        <p className="text-xs text-muted-foreground opacity-50 block md:hidden mt-8">Swipe to reveal answer</p>
                     </CardContent>
                 </Card>
 
@@ -151,14 +217,18 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                     <div className="absolute top-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                         Translation
                     </div>
-                    <CardContent className="text-center space-y-6">
+                    <CardContent className="text-center space-y-6 pointer-events-none">
                         <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-50">
                             {backTerm.toUpperCase()}
                         </h2>
                         <div className="space-y-2 w-full">
                             <div className="w-16 h-1 bg-black/10 mx-auto rounded-full mb-4" />
                             <HighlightedSentence text={activeBackCard.ex} globalVocab={globalVocab} />
+                            {activeBackCard.conjugations && !isReverseMode && (
+                                <ConjugationTable conjugations={activeBackCard.conjugations} />
+                            )}
                         </div>
+                        <p className="text-xs text-muted-foreground opacity-50 block md:hidden absolute bottom-4 left-0 right-0 text-center">Swipe for next card</p>
                     </CardContent>
                 </Card>
             </motion.div>

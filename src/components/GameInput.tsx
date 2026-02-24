@@ -58,7 +58,7 @@ export function GameInput({ onCheck, onGiveUp, onSkip, onNext, isReviewing, feed
     };
 
     return (
-        <div className="w-full max-w-[600px] flex flex-col gap-4 items-center">
+        <div className="w-full max-w-[600px] flex flex-col gap-4 items-center sticky md:static bottom-0 bg-[#f4f7f6] dark:bg-slate-950 p-4 -mx-4 pb-8 md:p-0 md:mx-0 md:bg-transparent border-t md:border-transparent z-40">
             {/* Feedback Message */}
             <div className={`h-8 font-bold text-lg transition-all duration-300 ${feedbackType === 'success' ? 'text-green-600' :
                 feedbackType === 'warning' ? 'text-amber-600' :

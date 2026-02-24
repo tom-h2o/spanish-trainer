@@ -41,22 +41,23 @@ function Game({ session }: { session: Session }) {
   return (
     <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-8">
       {/* HEADER */}
-      <header className="text-center space-y-2 mb-4 relative w-full">
+      <header className="text-center space-y-2 pt-4 mb-4 relative w-full">
         <Button
           variant="outline"
           size="sm"
-          className="absolute right-0 top-0"
+          className="absolute right-0 top-2 md:top-0"
           onClick={() => supabase.auth.signOut()}
         >
-          Sign Out
+          <span className="hidden sm:inline">Sign Out</span>
+          <span className="sm:hidden">Exit</span>
         </Button>
-        <div className="inline-block bg-white dark:bg-slate-900 px-4 py-1 rounded-full shadow-sm border text-xs font-bold uppercase tracking-widest text-primary mb-2">
+        <div className="inline-block bg-white dark:bg-slate-900 px-3 py-1 md:px-4 md:py-1 rounded-full shadow-sm border text-[10px] md:text-xs font-bold uppercase tracking-widest text-primary mb-1 md:mb-2">
           Vocabulary Trainer
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">
+        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">
           🇪🇸 Spanish Flashcards
         </h1>
-        <p className="text-muted-foreground">Master your daily vocabulary with spaced repetition.</p>
+        <p className="text-sm md:text-base text-muted-foreground px-4">Master your daily vocabulary with spaced repetition.</p>
 
         {/* VIEW TOGGLE TABS */}
         <div className="flex justify-center gap-2 mt-6">
@@ -99,6 +100,8 @@ function Game({ session }: { session: Session }) {
                 lastResult={state.lastResult}
                 globalVocab={vocabList}
                 isReverseMode={state.isReverseMode}
+                onNext={nextCard}
+                onGiveUp={handleGiveUp}
               />
             </div>
 
@@ -171,7 +174,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[#f4f7f6] dark:bg-slate-950 flex flex-col items-center py-10 px-4 font-sans text-slate-900 selection:bg-blue-100">
+    <div className="min-h-screen w-full bg-[#f4f7f6] dark:bg-slate-950 flex flex-col items-center py-4 md:py-10 px-4 font-sans text-slate-900 selection:bg-blue-100 overflow-x-hidden">
       <Game session={session} />
     </div>
   );
