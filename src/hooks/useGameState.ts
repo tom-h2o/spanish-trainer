@@ -100,6 +100,7 @@ export function useGameState(session: Session) {
                 if (savedWord) {
                     return {
                         ...dbWord,
+                        conjugations: dbWord.conjugations,
                         repetition: savedWord.repetition,
                         interval: savedWord.interval,
                         easiness_factor: savedWord.easiness_factor,
@@ -109,6 +110,7 @@ export function useGameState(session: Session) {
                 } else {
                     return {
                         ...dbWord,
+                        conjugations: dbWord.conjugations,
                         repetition: 0,
                         interval: 0,
                         easiness_factor: 2.5,
