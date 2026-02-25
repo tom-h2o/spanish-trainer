@@ -179,20 +179,22 @@ function buildSqlString() {
     // Parse Data Rows: en|es|type|ex
     const parts = trimmedLine.split('|');
     if (parts.length >= 4) {
-      const rawEn = parts[0].trim();
-      const es = parts[1].trim();
+      const spanishWord = parts[0].trim(); // In the DB, 'en' holds Spanish
+      const englishTranslation = parts[1].trim(); // In the DB, 'es' holds English
       const type = parts[2].trim();
       const ex = parts[3].trim();
 
-      const parsedEn = parseTermAndTags(rawEn);
-      const en = parsedEn.cleanText;
-      const tagsJson = JSON.stringify(parsedEn.tags);
+      const parsedEnglish = parseTermAndTags(englishTranslation);
+
+      const en = spanishWord;
+      const es = parsedEnglish.cleanText;
+      const tagsJson = JSON.stringify(parsedEnglish.tags);
 
       const deckPart = categoryToPartMapping[currentCategory] || 10;
 
       let conjugations = "null";
       if (type.includes("verb") || type === "verb") {
-        conjugations = `'${getConjugationJSON(rawEn)}'::jsonb`; // 'rawEn' variable contains Spanish text originally
+        conjugations = `'${getConjugationJSON(spanishWord)}'::jsonb`;
       }
 
       parsedWords.push({ en, es, type, ex, p: deckPart, conjugations, tags: tagsJson });
