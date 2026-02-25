@@ -206,11 +206,15 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
     const activeFrontCard = displayCardFront || card;
     const activeBackCard = displayCardBack || card;
 
-    const frontData = isReverseMode ? parseTermAndTags(activeFrontCard.en) : { cleanText: activeFrontCard.es, tags: [] };
-    const backData = isReverseMode ? { cleanText: activeBackCard.es, tags: [] } : parseTermAndTags(activeBackCard.en);
+    const parsedFrontEn = parseTermAndTags(activeFrontCard.en);
+    const parsedBackEn = parseTermAndTags(activeBackCard.en);
 
-    const frontTerm = frontData.cleanText;
-    const backTerm = backData.cleanText;
+    const frontTerm = isReverseMode ? parsedFrontEn.cleanText : activeFrontCard.es;
+    const backTerm = isReverseMode ? activeBackCard.es : parsedBackEn.cleanText;
+
+    const frontTags = isReverseMode ? [] : parsedFrontEn.tags;
+    const backTags = isReverseMode ? parsedBackEn.tags : [];
+
     const frontInstruction = isReverseMode ? "Translate to Spanish" : "Translate to English";
 
     return (
@@ -241,7 +245,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                                 {activeFrontCard.type}
                             </div>
                         )}
-                        {frontData.tags.map((tag, i) => (
+                        {frontTags.map((tag, i) => (
                             <div key={i} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50">
                                 {tag}
                             </div>
@@ -285,7 +289,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                         Translation
                     </div>
                     <div className="absolute top-4 left-4 flex flex-wrap gap-2 pr-12">
-                        {backData.tags.map((tag, i) => (
+                        {backTags.map((tag, i) => (
                             <div key={i} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50">
                                 {tag}
                             </div>
