@@ -71,7 +71,11 @@ export function useGameState(session: Session) {
     });
 
     const toggleReverseMode = () => {
-        setState(prev => ({ ...prev, isReverseMode: !prev.isReverseMode }));
+        setState(prev => {
+            const newIsReverseMode = !prev.isReverseMode;
+            syncSettingsToDB(filters, newIsReverseMode);
+            return { ...prev, isReverseMode: newIsReverseMode };
+        });
     };
 
     // --- Initialization from Supabase ---
@@ -81,14 +85,23 @@ export function useGameState(session: Session) {
 
             setState(prev => ({ ...prev, isLoading: true }));
 
-            // Concurrently fetch the global dictionary and user progress
-            const [wordsResponse, progressResponse] = await Promise.all([
+            // Concurrently fetch the global dictionary, user progress, and user settings
+            const [wordsResponse, progressResponse, settingsResponse] = await Promise.all([
                 supabase.from('words').select('*').order('id', { ascending: true }),
-                supabase.from('user_progress').select('*').eq('user_id', session.user.id)
+                supabase.from('user_progress').select('*').eq('user_id', session.user.id),
+                supabase.from('user_settings').select('*').eq('user_id', session.user.id).single()
             ]);
 
             if (wordsResponse.error) console.error("Error fetching words:", wordsResponse.error);
             if (progressResponse.error) console.error("Error fetching progress:", progressResponse.error);
+
+            if (settingsResponse.data) {
+                setFilters({
+                    levels: settingsResponse.data.levels as LevelFilter[],
+                    parts: settingsResponse.data.parts as PartFilter[],
+                });
+                setState(prev => ({ ...prev, isReverseMode: settingsResponse.data.is_reverse_mode }));
+            }
 
             const dbWords = wordsResponse.data || [];
             const progressMap = new Map();
@@ -237,6 +250,26 @@ export function useGameState(session: Session) {
         }
     };
 
+    const syncSettingsToDB = async (newFilters: typeof filters, newIsReverseMode: boolean) => {
+        if (!session?.user?.id) return;
+
+        const { error } = await supabase
+            .from('user_settings')
+            .upsert({
+                user_id: session.user.id,
+                levels: newFilters.levels,
+                parts: newFilters.parts,
+                is_reverse_mode: newIsReverseMode,
+                updated_at: new Date().toISOString()
+            }, {
+                onConflict: 'user_id'
+            });
+
+        if (error) {
+            console.error("Failed to sync settings:", error);
+        }
+    };
+
     // --- Actions ---
     const handleCheckAction = async (isCorrect: boolean, isFuzzy: boolean, isSkip: boolean, message: string, type: GameState['feedbackType'], resultType: GameState['lastResult']) => {
         if (!state.currentCard || state.isReviewing) return;
@@ -347,7 +380,10 @@ export function useGameState(session: Session) {
             const newLevels = prev.levels.includes(lvl)
                 ? prev.levels.filter(l => l !== lvl)
                 : [...prev.levels, lvl];
-            return { ...prev, levels: newLevels };
+
+            const newFilters = { ...prev, levels: newLevels };
+            syncSettingsToDB(newFilters, state.isReverseMode);
+            return newFilters;
         });
     };
 
@@ -356,7 +392,10 @@ export function useGameState(session: Session) {
             const newParts = prev.parts.includes(p)
                 ? prev.parts.filter(x => x !== p)
                 : [...prev.parts, p];
-            return { ...prev, parts: newParts };
+
+            const newFilters = { ...prev, parts: newParts };
+            syncSettingsToDB(newFilters, state.isReverseMode);
+            return newFilters;
         });
     };
 
