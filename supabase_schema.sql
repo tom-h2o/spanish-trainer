@@ -24,14 +24,17 @@ create table if not exists public.user_progress (
 alter table public.user_progress enable row level security;
 
 -- Create policies so users can only read/write their own data
+drop policy if exists "Users can view their own progress" on public.user_progress;
 create policy "Users can view their own progress"
   on public.user_progress for select
   using ( auth.uid() = user_id );
 
+drop policy if exists "Users can insert their own progress" on public.user_progress;
 create policy "Users can insert their own progress"
   on public.user_progress for insert
   with check ( auth.uid() = user_id );
 
+drop policy if exists "Users can update their own progress" on public.user_progress;
 create policy "Users can update their own progress"
   on public.user_progress for update
   using ( auth.uid() = user_id );
@@ -49,14 +52,17 @@ create table if not exists public.user_settings (
 alter table public.user_settings enable row level security;
 
 -- Create policies so users can only read/write their own settings
+drop policy if exists "Users can view their own settings" on public.user_settings;
 create policy "Users can view their own settings"
   on public.user_settings for select
   using ( auth.uid() = user_id );
 
+drop policy if exists "Users can insert their own settings" on public.user_settings;
 create policy "Users can insert their own settings"
   on public.user_settings for insert
   with check ( auth.uid() = user_id );
 
+drop policy if exists "Users can update their own settings" on public.user_settings;
 create policy "Users can update their own settings"
   on public.user_settings for update
   using ( auth.uid() = user_id );
