@@ -128,15 +128,6 @@ function ConjugationTable({ conjugations }: { conjugations: Word['conjugations']
     );
 }
 
-function parseTermAndTags(term: string) {
-    const tags: string[] = [];
-    const cleanText = term.replace(/\(([^)]+)\)/g, (_, match) => {
-        tags.push(match.trim());
-        return "";
-    }).trim();
-    return { cleanText, tags };
-}
-
 export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverseMode, onNext, onGiveUp }: GameCardProps) {
     // Keep a local copy of the card data so we can delay updating the back
     // during the flip animation.
@@ -206,14 +197,11 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
     const activeFrontCard = displayCardFront || card;
     const activeBackCard = displayCardBack || card;
 
-    const parsedFrontEn = parseTermAndTags(activeFrontCard.en);
-    const parsedBackEn = parseTermAndTags(activeBackCard.en);
+    const frontTerm = isReverseMode ? activeFrontCard.en : activeFrontCard.es;
+    const backTerm = isReverseMode ? activeBackCard.es : activeBackCard.en;
 
-    const frontTerm = isReverseMode ? parsedFrontEn.cleanText : activeFrontCard.es;
-    const backTerm = isReverseMode ? activeBackCard.es : parsedBackEn.cleanText;
-
-    const frontTags = isReverseMode ? [] : parsedFrontEn.tags;
-    const backTags = isReverseMode ? parsedBackEn.tags : [];
+    const frontTags = isReverseMode ? [] : (activeFrontCard.tags || []);
+    const backTags = isReverseMode ? (activeBackCard.tags || []) : [];
 
     const frontInstruction = isReverseMode ? "Translate to Spanish" : "Translate to English";
 

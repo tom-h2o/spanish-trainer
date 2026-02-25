@@ -25,6 +25,16 @@ interface ParsedWord {
   ex: string;
   p: number;
   conjugations?: string; // JSON string encoded
+  tags: string; // JSON string encoded array
+}
+
+function parseTermAndTags(term: string) {
+  const tags: string[] = [];
+  const cleanText = term.replace(/\(([^)]+)\)/g, (_, match) => {
+    tags.push(match.trim());
+    return "";
+  }).trim();
+  return { cleanText, tags };
 }
 
 const irregularVerbs: Record<string, string[]> = {
@@ -169,19 +179,23 @@ function buildSqlString() {
     // Parse Data Rows: en|es|type|ex
     const parts = trimmedLine.split('|');
     if (parts.length >= 4) {
-      const en = parts[0].trim();
+      const rawEn = parts[0].trim();
       const es = parts[1].trim();
       const type = parts[2].trim();
       const ex = parts[3].trim();
+
+      const parsedEn = parseTermAndTags(rawEn);
+      const en = parsedEn.cleanText;
+      const tagsJson = JSON.stringify(parsedEn.tags);
 
       const deckPart = categoryToPartMapping[currentCategory] || 10;
 
       let conjugations = "null";
       if (type.includes("verb") || type === "verb") {
-        conjugations = getConjugationJSON(en); // 'en' variable holds the Spanish word because parts[0] is Spanish
+        conjugations = `'${getConjugationJSON(rawEn)}'::jsonb`; // 'rawEn' variable contains Spanish text originally
       }
 
-      parsedWords.push({ en, es, type, ex, p: deckPart, conjugations });
+      parsedWords.push({ en, es, type, ex, p: deckPart, conjugations, tags: tagsJson });
     }
   }
 
@@ -200,9 +214,10 @@ function buildSqlString() {
     "    es TEXT NOT NULL,\n" +
     "    type TEXT,\n" +
     "    ex TEXT,\n" +
-    "    p INTEGER DEFAULT 1,\n" +
+    "    p INTEGER NOT NULL,\n" +
     "    lvl INTEGER DEFAULT 0,\n" +
-    "    conjugations JSONB\n" +
+    "    conjugations JSONB,\n" +
+    "    tags JSONB DEFAULT '[]'::jsonb\n" +
     ");\n\n" +
     "-- Turn on Row Level Security\n" +
     "ALTER TABLE public.words ENABLE ROW LEVEL SECURITY;\n\n" +
@@ -210,7 +225,7 @@ function buildSqlString() {
     "CREATE POLICY \"Enable read access for all authenticated users\"\n" +
     "ON public.words FOR SELECT\n" +
     "TO authenticated USING (true);\n\n" +
-    "INSERT INTO public.words (en, es, type, ex, p, lvl, conjugations) VALUES\n";
+    "INSERT INTO public.words (en, es, type, ex, p, lvl, conjugations, tags) VALUES\n";
 
   const values = parsedWords.map(w => {
     // Escape single quotes for SQL
@@ -223,8 +238,9 @@ function buildSqlString() {
     if (w.conjugations && w.conjugations !== "null") {
       conjEscaped = "'" + w.conjugations.replace(/'/g, "''") + "'::jsonb";
     }
+    const tagsEscaped = "'" + w.tags.replace(/'/g, "''") + "'::jsonb";
 
-    return "  ('" + safeEn + "', '" + safeEs + "', '" + safeType + "', '" + safeEx + "', " + w.p + ", 0, " + conjEscaped + ")";
+    return "  ('" + safeEn + "', '" + safeEs + "', '" + safeType + "', '" + safeEx + "', " + w.p + ", 0, " + conjEscaped + ", " + tagsEscaped + ")";
   });
 
   sql += values.join(',\n') + ';\n\n';

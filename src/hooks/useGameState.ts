@@ -19,6 +19,7 @@ export interface Word {
         ellos: string;
         gerundio?: string;
     };
+    tags?: string[];
 }
 
 export interface GameState {
@@ -117,6 +118,7 @@ export function useGameState(session: Session) {
                     return {
                         ...dbWord,
                         conjugations: dbWord.conjugations,
+                        tags: dbWord.tags || [],
                         repetition: savedWord.repetition,
                         interval: savedWord.interval,
                         easiness_factor: savedWord.easiness_factor,
@@ -127,6 +129,7 @@ export function useGameState(session: Session) {
                     return {
                         ...dbWord,
                         conjugations: dbWord.conjugations,
+                        tags: dbWord.tags || [],
                         repetition: 0,
                         interval: 0,
                         easiness_factor: 2.5,
