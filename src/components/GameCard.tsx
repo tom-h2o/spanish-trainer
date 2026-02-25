@@ -60,7 +60,7 @@ function HighlightedSentence({ text, globalVocab }: { text: string; globalVocab:
     const wordsAndPunctuation = text.split(/([.,!¿?¡:;"'()\s]+)/);
 
     return (
-        <p className="text-sm text-muted-foreground italic px-8 leading-relaxed">
+        <p className="pointer-events-auto text-sm text-muted-foreground italic px-8 leading-relaxed">
             {wordsAndPunctuation.map((segment, i) => {
                 if (!segment.trim() || /^[.,!¿?¡:;"'()\s]+$/.test(segment)) {
                     return <span key={i}>{segment}</span>;
@@ -126,6 +126,15 @@ function ConjugationTable({ conjugations }: { conjugations: Word['conjugations']
             </div>
         </div>
     );
+}
+
+function parseTermAndTags(term: string) {
+    const tags: string[] = [];
+    const cleanText = term.replace(/\(([^)]+)\)/g, (_, match) => {
+        tags.push(match.trim());
+        return "";
+    }).trim();
+    return { cleanText, tags };
 }
 
 export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverseMode, onNext, onGiveUp }: GameCardProps) {
@@ -197,8 +206,11 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
     const activeFrontCard = displayCardFront || card;
     const activeBackCard = displayCardBack || card;
 
-    const frontTerm = isReverseMode ? activeFrontCard.en : activeFrontCard.es;
-    const backTerm = isReverseMode ? activeBackCard.es : activeBackCard.en;
+    const frontData = isReverseMode ? parseTermAndTags(activeFrontCard.en) : { cleanText: activeFrontCard.es, tags: [] };
+    const backData = isReverseMode ? { cleanText: activeBackCard.es, tags: [] } : parseTermAndTags(activeBackCard.en);
+
+    const frontTerm = frontData.cleanText;
+    const backTerm = backData.cleanText;
     const frontInstruction = isReverseMode ? "Translate to Spanish" : "Translate to English";
 
     return (
@@ -220,7 +232,7 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
             >
                 {/* FRONT */}
                 <Card className="absolute w-full h-full backface-hidden flex flex-col items-center justify-center border-t-4 border-t-primary shadow-lg p-6 bg-white dark:bg-slate-900">
-                    <div className="absolute top-4 left-4 flex gap-2">
+                    <div className="absolute top-4 left-4 flex flex-wrap gap-2 pr-12">
                         <div className="text-xs font-mono text-muted-foreground bg-muted px-2 py-1 rounded">
                             Part {activeFrontCard.p} • Level {activeFrontCard.lvl}
                         </div>
@@ -229,6 +241,11 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                                 {activeFrontCard.type}
                             </div>
                         )}
+                        {frontData.tags.map((tag, i) => (
+                            <div key={i} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50">
+                                {tag}
+                            </div>
+                        ))}
                     </div>
                     <CardContent className="text-center space-y-4 pointer-events-none">
                         <h2 className="text-5xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">
@@ -266,6 +283,13 @@ export function GameCard({ card, isReviewing, lastResult, globalVocab, isReverse
                 >
                     <div className="absolute top-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                         Translation
+                    </div>
+                    <div className="absolute top-4 left-4 flex flex-wrap gap-2 pr-12">
+                        {backData.tags.map((tag, i) => (
+                            <div key={i} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50">
+                                {tag}
+                            </div>
+                        ))}
                     </div>
                     <CardContent className="text-center space-y-6 pointer-events-none">
                         <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-50">
